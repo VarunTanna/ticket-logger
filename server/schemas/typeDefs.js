@@ -3,10 +3,30 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Ticket {
     _id: ID
+    title: String
+    description: String
+    order: Number
+    type: String
+    duedate: Date
+    project: Project
+    user: User
+  }
+
+  type Group {
     name: String
+    users: User
+  }
+
+  type Project {
+    name: String
+    rep: String
+    group: Group
+  }
+
+  type User {
     email: String
     password: String
-    tickets: [String]!
+    github: String
   }
 
   type Auth {
