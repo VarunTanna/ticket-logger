@@ -1,5 +1,18 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
+      _id
+      email
+      password
+      github
+      
+    }
+  }
+`;
+
+
 export const QUERY_TICKETS = gql`
   query allTickets {
     tickets {

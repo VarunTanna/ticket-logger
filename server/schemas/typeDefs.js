@@ -5,9 +5,9 @@ const typeDefs = gql`
     _id: ID
     title: String
     description: String
-    order: Number
+    order: Int
     type: String
-    duedate: Date
+    duedate: String
     project: Project
     user: User
   }
@@ -35,13 +35,17 @@ const typeDefs = gql`
   }
 
   type Query {
+    users: [User]!
+    user(userId: ID!): User
+    me: User
     tickets: [Ticket]!
     ticket(ticketId: ID!): Ticket
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
-    me: Ticket
+    
   }
 
   type Mutation {
+    addUser(name: String!, email: String!, password: String!): Auth
     addTicket(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 

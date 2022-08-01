@@ -1,12 +1,13 @@
 import { gql } from '@apollo/client';
 
-export const ADD_TICKET = gql`
-  mutation addTicket($name: String!, $email: String!, $password: String!) {
-    addTicket(name: $name, email: $email, password: $password) {
+export const CREATE_USER = gql`
+  mutation addUser($email: String!, $password: String!, $github: String!,) {
+    addUser(email: $email, password: $password, github: $github, ) {
       token
-      ticket {
+      user {
         _id
-        name
+        email
+        github
       }
     }
   }

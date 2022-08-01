@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import TicketList from '../components/TicketList';
 
-import { QUERY_TICKETS } from '../../utils/queries';
+import { QUERY_TICKETS } from '../utils/queries';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_TICKETS);

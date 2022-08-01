@@ -8,12 +8,15 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './src/pages/Home';
-import Profile from './src/pages/Profile';
-import Signup from './src/pages/Signup';
-import Login from './src/pages/Login';
-import Header from './src/components/Header';
-import Footer from './src/components/Footer';
+import Home from './pages/Home';
+//import Profile from './pages/Profile';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+//import Group from './pages/Group';
+//import Project from './pages/Project';
+//import Tickets from './pages/Tickets';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -56,14 +59,26 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              <Route 
+              {/* <Route 
                 path="/me" 
                 element={<Profile />} 
-              />
-              <Route 
+              /> */}
+              {/* <Route 
                 path="/profiles/:profileId" 
                 element={<Profile />} 
+              /> */}
+              {/* <Route 
+                path="/tickets" 
+                element={<Tickets />} 
               />
+              <Route 
+                path="/projects/" 
+                element={<Project />} 
+              />
+              <Route 
+                path="/groups/" 
+                element={<Group />} 
+              /> */}
             </Routes>
           </div>
           <Footer />

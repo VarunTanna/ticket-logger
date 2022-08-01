@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import TicketsList from '../components/TicketList';
 import TicketForm from '../components/TicketForm';
 
-import { QUERY_SINGLE_TICKET, QUERY_ME } from '../../utils/queries';
+import { QUERY_SINGLE_TICKET, QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
