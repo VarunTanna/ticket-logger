@@ -80,6 +80,17 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    createTicket: async (parent, {ticketId, ticket }, context) => {
+      if(context.user) {
+        return Ticket.create(
+          { _id: ticketId},
+          { $addToSet: { ticket: ticket}},
+          { new: true, runValidators: true}
+        );
+      }
+      throw new AuthenticationError('No user created')
+    },
+    updateTicket: async 
   },
 };
 
