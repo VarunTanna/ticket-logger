@@ -1,26 +1,22 @@
 [
     {
-        "name": "Chris",
         "email": "cokamuro@gmail.com",
         "password": "123aiko",
         "github": "cokamuro"
 
     },
     {
-        "name": "Sela",
         "email": "sela@gmail.com",
         "password": "dragon666",
         "github": "selaprivette"
     },
     {
-        "name": "Victoria",
         "email": "victoria@gmail.com",
         "password": "lighteningrod333",
         "github": "cokamuro"
         
     },
     {
-        "name": "Varun",
         "email": "varun@gmail.com",
         "password": "boatluvr42",
         "github": "cokamuro"
