@@ -6,8 +6,8 @@ const groupSchema = new Schema({
       required: true,
     },
     users: [{
-        user: Schema.Types.ObjectId,
-        ref: 'User',
+        type: Schema.Types.ObjectId,
+        ref: 'user',
       }]
   });
   

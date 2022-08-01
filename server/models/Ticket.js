@@ -22,12 +22,12 @@ const ticketSchema = new Schema({
         type: Date
     },
     project: {
-        id: Schema.Types.ObjectId,
-        ref: 'Project',
+        type: Schema.Types.ObjectId,
+        ref: 'project',
     },
     user: {
-        id: Schema.Types.ObjectId,
-        ref: 'User',
+        type: Schema.Types.ObjectId,
+        ref: 'user',
     }
 });
 

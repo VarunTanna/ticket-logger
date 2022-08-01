@@ -10,8 +10,8 @@ const projectSchema = new Schema({
         required: true,
     },
     group: {
-        id: Schema.Types.ObjectId,
-        ref: 'Group',
+        type: Schema.Types.ObjectId,
+        ref: 'group',
     }
 });
 
