@@ -9,6 +9,10 @@ db.once('open', async () => {
     await Ticket.create(ticketSeeds);
     await User.deleteMany({});
     await User.create(userSeeds);
+    await Group.deleteMany({});
+    await Group.create(groupSeeds);
+    await Project.deleteMany({});
+    await Project.create(projectSeeds);
     console.log('all done!');
     process.exit(0);
   } catch (err) {
