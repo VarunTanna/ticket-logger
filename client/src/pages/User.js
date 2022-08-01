@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-// import {}
+import TicketsList from "../components/TicketsList";
+import TicketForm from "../components/TicketForm";
 
 const User = () => {
   const { username: userParam } = useParams();
@@ -36,7 +37,7 @@ const User = () => {
         </h2>
 
         <div className="col-12 col-md-10 mb-5">
-          <TicketList
+          <TicketsList
             tickets={user.tickets}
             title={`${user.username}'s tickets...`}
             showTitle={false}
@@ -48,7 +49,7 @@ const User = () => {
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >
-            <RepoForm />
+            <TicketForm />
           </div>
         )}
       </div>
