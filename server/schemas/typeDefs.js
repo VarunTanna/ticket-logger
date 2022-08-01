@@ -5,9 +5,9 @@ const typeDefs = gql`
     _id: ID
     title: String
     description: String
-    order: Number
+    order: Int
     type: String
-    duedate: Date
+    duedate: String
     project: Project
     user: User
   }
