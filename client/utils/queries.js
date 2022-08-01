@@ -5,7 +5,7 @@ export const QUERY_TICKETS = gql`
     tickets {
       _id
       name
-      skills
+      tickets
     }
   }
 `;
@@ -15,7 +15,7 @@ export const QUERY_SINGLE_TICKET = gql`
     ticket(ticketId: $ticketId) {
       _id
       name
-      skills
+      ticket
     }
   }
 `;
