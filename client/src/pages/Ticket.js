@@ -8,7 +8,6 @@ import { QUERY_SINGLE_TICKET } from '../utils/queries';
 
 
 const SingleTicket = () => {
-  // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const { ticketId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
@@ -24,9 +23,9 @@ const SingleTicket = () => {
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-0">
-        {ticket.ticketAuthor} <br />
+        {ticket.ticketUser} <br />
         <span style={{ fontSize: '1rem' }}>
-          had this ticket on {ticket.createdAt}
+          opened this ticket {ticket.order}
         </span>
       </h3>
       <div className="bg-light py-4">
@@ -39,7 +38,7 @@ const SingleTicket = () => {
             lineHeight: '1.5',
           }}
         >
-          {ticket.ticketText}
+          {ticket.ticketTitle}
         </blockquote>
       </div>
       <div className="my-5">
