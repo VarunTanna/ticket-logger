@@ -12,6 +12,9 @@ import Home from './src/pages/Home';
 import Profile from './src/pages/Profile';
 import Signup from './src/pages/Signup';
 import Login from './src/pages/Login';
+import Group from './src/pages/Group';
+import Project from './src/pages/Project';
+import Tickets from './src/pages/Tickets';
 import Header from './src/components/Header';
 import Footer from './src/components/Footer';
 
@@ -63,6 +66,18 @@ function App() {
               <Route 
                 path="/profiles/:profileId" 
                 element={<Profile />} 
+              />
+              <Route 
+                path="/tickets" 
+                element={<Ticket />} 
+              />
+              <Route 
+                path="/projects/" 
+                element={<Project />} 
+              />
+              <Route 
+                path="/groups/" 
+                element={<Group />} 
               />
             </Routes>
           </div>
