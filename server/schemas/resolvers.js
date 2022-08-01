@@ -101,9 +101,8 @@ const resolvers = {
         );
       }
       throw new AuthenticationError('No user created')
-    },
-    updateTicket: async 
-  },
+    }
+  }
 };
 
 module.exports = resolvers;
