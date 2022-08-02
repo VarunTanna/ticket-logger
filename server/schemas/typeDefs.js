@@ -24,6 +24,7 @@ const typeDefs = gql`
   }
 
   type User {
+    _id: ID
     email: String
     password: String
     github: String
@@ -31,7 +32,7 @@ const typeDefs = gql`
 
   type Auth {
     token: ID!
-    ticket: Ticket
+    user: User
   }
 
   type Query {
@@ -45,7 +46,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!): Auth
+    addUser(email: String!, password: String!, github: String!): Auth
     addTicket(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createTicket(ticket: ID! tickets: String!): Ticket

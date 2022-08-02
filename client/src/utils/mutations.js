@@ -6,8 +6,8 @@ export const CREATE_USER = gql`
       token
       user {
         _id
-        email
         github
+        email
       }
     }
   }
