@@ -58,8 +58,8 @@ const typeDefs = gql`
     createProject(name: String!, rep: String!, groupId: ID!): Project
 
     addTickets(ticketId: ID!, tickets: String!): Ticket
-    removeTicket: Ticket
-    removeTickets(tickets: String!): Ticket
+    removeTicket(ticketId: ID!): Ticket
+    removeTickets(ticketsId: ID!): Tickets
   }
 `;
 

@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Ticket, Group, Project } = require('../models');
+const { User, Ticket, Group, Project, Tickets } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -108,22 +108,19 @@ const resolvers = {
     },
       
     // Set up mutation so a logged in user can only remove their profile and no one else's
-    removeTicket: async (parent, args, context) => {
-      if (context.user) {
-        return Ticket.findOneAndDelete({ _id: context.user._id });
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    removeTicket: async (parent, {_id}) => {
+      const ticket = await Ticket.deleteOne(
+        {_id}
+      )
+      return ticket;
     },
     // Make it so a logged in user can only remove a skill from their own profile
-    removeTicket: async (parent, { ticket }, context) => {
-      if (context.user) {
-        return Ticket.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { ticket: ticket } },
-          { new: true }
-        );
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    removeTickets: async (parent, { _id }) => {
+      const tickets = await Tickets.deleteOne(
+        {_id}
+      
+      )
+      return tickets;
     },
     createTicket: async (parent, {ticketId, ticket }, context) => {
       if(context.user) {
@@ -147,25 +144,23 @@ const resolvers = {
     return group;
     },
   //delete group
-     async deleteGroup (parent, {_id}) {
+     deleteGroup: async (parent, {_id}) => {
       const group = await Group.deleteOne(
        {_id}
       );
-
+    
      return group;
     },
-      throw new AuthenticationError('No ticket created')
     },
     createProject: async (parent, {projectId, project}, context) => {
-      if(context.user) {
-        return Project.create(
-          { _id: projectId},
-          { $addToSet: { project: project}},
-          { new: true, runValidators: true}
-        );
-      }
-      throw new AuthenticationError('No ticket created')
-    }
+      const project = await Project.create(
+        {_id: projectId},
+        { $addToSet: {project: project}},
+        {new: true, runValidators: true}
+      )
+
+      return project;
+    },
   }
 };
 
