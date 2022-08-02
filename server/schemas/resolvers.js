@@ -153,9 +153,9 @@ const resolvers = {
       );
 
      return group;
+      }
     },
-      throw new AuthenticationError('No ticket created')
-    },
+    }
     createProject: async (parent, {projectId, project}, context) => {
       if(context.user) {
         return Project.create(
@@ -164,8 +164,7 @@ const resolvers = {
           { new: true, runValidators: true}
         );
       }
-      throw new AuthenticationError('No ticket created')
-    }
+    },
   }
 };
 
