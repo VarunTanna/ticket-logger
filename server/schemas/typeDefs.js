@@ -43,7 +43,7 @@ const typeDefs = gql`
     user(userId: ID!): User
     me: User
     group: [User]
-    groups: [group]
+    groups: [Group]
     tickets: [Ticket]!
     ticket(ticketId: ID!): Ticket
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
