@@ -3,6 +3,8 @@ import { useQuery } from '@apollo/client';
 import TicketsList from "../components/TicketsList";
 import TicketForm from "../components/TicketForm";
 import Auth from '../utils/auth';
+import { Navigate, useParams } from 'react-router-dom';
+import { QUERY_USER, QUERY_ME } from "../utils/queries";
 
 const User = () => {
   const { username: userParam } = useParams();
