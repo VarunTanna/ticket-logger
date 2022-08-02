@@ -51,7 +51,6 @@ const typeDefs = gql`
     addTicket(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createTicket(ticket: ID! tickets: String!): Ticket
-
     addTickets(ticketId: ID!, tickets: String!): Ticket
     removeTicket: Ticket
     removeTickets(tickets: String!): Ticket

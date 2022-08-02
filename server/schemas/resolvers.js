@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Ticket, Group } = require('../models');
+const { User, Ticket, Group, Project } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -128,7 +128,7 @@ const resolvers = {
           { new: true, runValidators: true}
         );
       }
-      throw new AuthenticationError('No user created')
+      throw new AuthenticationError('No user created');
     },
     createGroup: async (parent, {_id}) => {
     const group = await Group.create(
@@ -147,6 +147,15 @@ const resolvers = {
       );
 
      return group;
+    },
+    createProject: async (parent, {projectId, project}, context) => {
+      const project = await Project.create(
+        {_id: projectId},
+        { $addToSet: {project: project}},
+        {new: true, runValidators: true}
+      )
+
+      return project;
     },
   }
 };
