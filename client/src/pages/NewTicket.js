@@ -6,7 +6,7 @@ import { QUERY_PROJECTS } from '../utils/queries'
 
 function NewTicket() {
 
-  const { loading, data } = useQuery(QUERY_PROJECTS)
+  const { loading, data } = useQuery(QUERY_PROJECTS);
 
   const projectList = data?.projects || [];
 
@@ -19,7 +19,7 @@ function NewTicket() {
     project: '',
     order: ``,
     duedate: '',
-  })
+  });
 
   const [createTicket, {error}] = useMutation(CREATE_TICKET);
 
@@ -38,7 +38,7 @@ function NewTicket() {
 
   return (
       <>
-          <h1 className="contactTitle">Create a Ticket</h1>
+          <h1>Create a Ticket</h1>
           <form className="form" style={style.form}>
               <label>Title:</label>
               <input 

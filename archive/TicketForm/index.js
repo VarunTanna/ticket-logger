@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import Auth from '../../utils/auth';
+import Auth from '../../client/src/utils/auth';
 
-import { ADD_TICKETS } from '../../utils/mutations';
+import { ADD_TICKETS } from '../../client/src/utils/mutations';
 
 const TicketForm = ({ ticketId }) => {
     const [tickets, setTickets] = useState('');
