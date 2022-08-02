@@ -17,11 +17,14 @@ const Signup = () => {
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    //console.log(name, value, event)
     setFormState({
-      ...formState,
+      email: formState.email.toLowerCase(),
+      password: formState.password,
+      github: formState.github.toLowerCase(),
       [name]: value,
     });
+    //console.log(name, value, event, formState)
   };
 
   // submit form
