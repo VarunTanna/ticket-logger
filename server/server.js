@@ -12,6 +12,10 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  formatError(error) {
+    console.log(error);
+    return error;
+  }
 });
 
 app.use(express.urlencoded({ extended: false }));
