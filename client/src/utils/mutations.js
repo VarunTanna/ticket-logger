@@ -13,16 +13,6 @@ export const CREATE_USER = gql`
   }
 `;
 
-export const ADD_TICKETS = gql`
-  mutation addTickets($ticketId: ID!, $tickets: String!) {
-    addSkill(ticketId: $ticketId, tickets: $tickets) {
-      _id
-      name
-      tickets
-    }
-  }
-`;
-
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -32,16 +22,6 @@ export const LOGIN_USER = gql`
         email
         github
       }
-    }
-  }
-`;
-
-export const REMOVE_TICKETS = gql`
-  mutation removeTickets($tickets: String!) {
-    removeTickets(tickets: $tickets) {
-      _id
-      name
-      tickets
     }
   }
 `;

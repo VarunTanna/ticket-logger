@@ -56,20 +56,14 @@ const typeDefs = gql`
   type Mutation {
     addUser(email: String!, password: String!, github: String!): Auth
     #deleteUser(email: String!, password: String!, github: String!): Auth
-    deleteUser: User
+    deleteUser(email: String!, password: String!, github: String!): User
     updateUser(email: String!, password: String!, github: String!): Auth
     login(email: String!, password: String!): Auth
 
     createTicket(title: String!, description: String!, type: String!, project: String!, order: Int!, duedate: String!): Ticket
     createProject(name: String!, rep: String!, groupId: ID!): Project
-
-
-    addTickets(ticketId: ID!, tickets: String!): Ticket
-    updateTicket(ticketId: ID!, tickets: String!): Ticket
-    removeTicket: Ticket
    
     createGroup(name: String!): Ticket
-    deleteGroup: Group
   }
 `;
 
