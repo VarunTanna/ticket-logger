@@ -19,7 +19,9 @@ const resolvers = {
     group: async (parent, args, context) => {
       return Group.find(args.users);
     },
-
+    groups: async () => {
+      return Group.find();
+    },
     tickets: async () => {
       return Ticket.find();
     },
