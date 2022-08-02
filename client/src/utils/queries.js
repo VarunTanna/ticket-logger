@@ -16,8 +16,7 @@ export const QUERY_TICKETS = gql`
   query allTickets {
     tickets {
       _id
-      name
-      tickets
+      title
     }
   }
 `;
@@ -26,7 +25,7 @@ export const QUERY_SINGLE_TICKET = gql`
   query singleTicket($ticketId: ID!) {
     ticket(ticketId: $ticketId) {
       _id
-      name
+      title
       ticket
     }
   }
