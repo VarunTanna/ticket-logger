@@ -12,7 +12,6 @@ export const QUERY_USER = gql`
   }
 `;
 
-
 export const QUERY_TICKETS = gql`
   query allTickets {
     tickets {
@@ -33,6 +32,7 @@ export const QUERY_SINGLE_TICKET = gql`
   }
 `;
 
+
 export const QUERY_ME = gql`
   query me {
     me {
@@ -51,4 +51,34 @@ export const QUERY_GROUP_USERS = gql`
       github
     }
   }
-`
+`;
+
+export const QUERY_GROUP_TICKETS = gql`
+  query group {
+    group {
+      _id
+      email
+      github
+    tickets {
+      _id
+      name
+      tickets
+    }
+    } 
+  }
+`;
+
+export const QUERY_ALL_USER_TICKETS = gql`
+query userTickets($email: String!) {
+  user(email: $email){
+      _id
+      email
+      github
+      tickets { 
+      _id
+      name
+      tickets
+    }
+    }
+  }
+`;

@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import TicketsList from "../components/TicketsList";
 import TicketForm from "../components/TicketForm";
+import Auth from '../utils/auth';
 
 const User = () => {
   const { username: userParam } = useParams();
