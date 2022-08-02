@@ -41,7 +41,7 @@ const resolvers = {
        return {token, user};
       
     },
-    updateUser(parent, {_id})  {
+    updateUser: async (parent, {_id}) => {
       const user = await User.findOneAndUpdate(
         { _id},
         { $set: req.body},
