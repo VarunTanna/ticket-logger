@@ -42,10 +42,12 @@ const typeDefs = gql`
     users: [User]!
     user(userId: ID!): User
     me: User
-    group: [User]
+    group: Group
     groups: [Group]
     tickets: [Ticket]!
     ticket(ticketId: ID!): Ticket
+    project(projectId: ID!): Project
+    projects: [Project]
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     
   }
@@ -54,7 +56,7 @@ const typeDefs = gql`
     addUser(email: String!, password: String!, github: String!): Auth
     addTicket(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    createTicket(ticket: ID! tickets: String!): Ticket
+    createTicket(title: String!, description: String!, type: String!, project: String!, order: Int!, duedate: String!): Ticket
     createProject(name: String!, rep: String!, groupId: ID!): Project
 
     addTickets(ticketId: ID!, tickets: String!): Ticket

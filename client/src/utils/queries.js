@@ -44,7 +44,7 @@ export const QUERY_ME = gql`
 
 export const QUERY_GROUP_USERS = gql`
   query group {
-    group {
+    users {
       _id
       email
       github
@@ -78,6 +78,16 @@ query userTickets($email: String!) {
       name
       tickets
     }
+    }
+  }
+`;
+
+export const QUERY_PROJECTS = gql`
+  query projects {
+    projects {
+      _id
+      name
+      rep
     }
   }
 `;

@@ -7,8 +7,9 @@ const resolvers = {
     users: async () => {
       return User.find();
     },
-    user: async (parent, { email }) => {
-      return User.findOne({ email });
+    user: async (parent, args) => {
+      console.log(args);
+      return User.findById(args.userId);
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -26,7 +27,13 @@ const resolvers = {
       return Ticket.find();
     },
     ticket: async (parent, { ticketId }) => {
-      return TicketfindOne({ _id: ticketId });
+      return Ticket.findOne({ _id: ticketId });
+    },
+    project: async () => {
+      return Project.find();
+    },
+    projects: async (parent, { ticketId }) => {
+      return Project.findOne({ _id: ticketId });
     },
   },
 
@@ -97,13 +104,19 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    createTicket: async (parent, {ticketId, ticket }, context) => {
+    // createTicket: async (parent, {ticketId, ticket }, context) => {
+    //   if(context.user) {
+    //     return Ticket.create(
+    //       { _id: ticketId},
+    //       { $addToSet: { ticket: ticket}},
+    //       { new: true, runValidators: true}
+    //     );
+    //   }
+    //   throw new AuthenticationError('No ticket created')
+    // },
+    createTicket: async (parent, args, context) => {
       if(context.user) {
-        return Ticket.create(
-          { _id: ticketId},
-          { $addToSet: { ticket: ticket}},
-          { new: true, runValidators: true}
-        );
+        return Ticket.create({...args, user: context.user});
       }
       throw new AuthenticationError('No ticket created')
     },

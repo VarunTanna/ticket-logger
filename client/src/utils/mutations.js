@@ -58,3 +58,16 @@ export const CREATE_PROJECT = gql`
     }
   }
 `;
+
+export const CREATE_TICKET = gql`
+  mutation createTicket($title: String!, $description: String!, $type: String!, $project: String!, $order: Int!, $duedate: String!, ) {
+    createTicket(title: $title, description: $description, type: $type, project: $project, order: $order, duedate: $duedate) {
+      title
+      description
+      type
+      project
+      order
+      duedate
+    }
+  }
+`;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 
-import TicketList from "../components/TicketList";
+import TicketList from "../pages/Tickets";
 
 import { QUERY_SINGLE_TICKET } from '../utils/queries';
 

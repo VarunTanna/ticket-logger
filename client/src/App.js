@@ -14,9 +14,10 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 //import Group from './pages/Group';
 //import Project from './pages/Project';
-//import Tickets from './pages/Tickets';
+import TicketsList from './pages/Tickets';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import NewTicket from './pages/NewTicket';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -58,6 +59,14 @@ function App() {
               <Route 
                 path="/signup" 
                 element={<Signup />} 
+              />
+              <Route
+                path="/myTickets"
+                element={<TicketsList />}
+              />
+              <Route
+                path="/newTicket"
+                element={<NewTicket />}
               />
               {/* <Route 
                 path="/me" 
