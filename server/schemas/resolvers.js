@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Ticket } = require('../models');
+const { User, Ticket, Group } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -32,6 +32,24 @@ const resolvers = {
       console.log("created",user);
       const token = signToken(user);
       return { token, user };
+    },
+    deleteUser: async (parent, {email, password, github}) => {
+      console.log('attempting to delete user', email);
+       const user = await User.findOneAndRemove({ email, password, github});
+       console.log('deleted', user);
+       const token = deleteToken(user);
+       return {token, user};
+      
+    },
+    updateUser(parent, {_id})  {
+      const user = await User.findOneAndUpdate(
+        { _id},
+        { $set: req.body},
+        { runValidators: true, new: true}
+      )
+
+      return user;
+      
     },
     addTicket: async (parent, { name, email, password }) => {
       const ticket = await Ticket.create({ name, email, password });
@@ -74,6 +92,16 @@ const resolvers = {
       // If user attempts to execute this mutation and isn't logged in, throw an error
       throw new AuthenticationError('You need to be logged in!');
     },
+    updateTicket: async (parent, {_id}) => {
+      const ticket = await Ticket.findOneAndUpdate( 
+        
+        {_id},
+        { $set: req.body},
+        { runValidators: true, new: true}
+      )
+      return ticket;
+    },
+      
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeTicket: async (parent, args, context) => {
       if (context.user) {
@@ -101,7 +129,25 @@ const resolvers = {
         );
       }
       throw new AuthenticationError('No user created')
-    }
+    },
+    createGroup: async (parent, {_id}) => {
+    const group = await Group.create(
+      {_id},
+      {$set: { group, user}},
+      {new: true}
+    );
+
+    
+    return group;
+    },
+  //delete group
+     async deleteGroup (parent, {_id}) {
+      const group = await Group.deleteOne(
+       {_id}
+      );
+
+     return group;
+    },
   }
 };
 
