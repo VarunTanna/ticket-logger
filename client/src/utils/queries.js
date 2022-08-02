@@ -12,6 +12,16 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_ALL_USERS = gql`
+  query users {
+    users {
+      _id
+      email
+      github
+    }
+  }
+`;
+
 export const QUERY_TICKETS = gql`
   query tickets {
     tickets {
@@ -38,6 +48,19 @@ export const QUERY_ME = gql`
       _id
       name
       tickets
+    }
+  }
+`;
+
+export const QUERY_GROUPS = gql`
+  query groups{
+    groups {
+      _id
+      name
+      users {
+        email
+        github
+      }
     }
   }
 `;

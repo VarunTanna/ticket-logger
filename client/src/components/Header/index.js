@@ -25,7 +25,7 @@ const Header = () => {
               <Link className="btn btn-lg btn-primary m-2" to="/myTickets">
                 View My Tickets
               </Link>
-              <Link className="btn btn-lg btn-primary m-2" to="/groups">
+              <Link className="btn btn-lg btn-primary m-2" to="/myGroups">
                 My Groups
               </Link>
               <Link className="btn btn-lg btn-primary m-2" to="/projects">
