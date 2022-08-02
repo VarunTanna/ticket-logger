@@ -38,7 +38,7 @@ function NewTicket() {
 
   return (
       <>
-          <h1 className="contactTitle">Contact Me</h1>
+          <h1 className="contactTitle">Create a Ticket</h1>
           <form className="form" style={style.form}>
               <label>Title:</label>
               <input 
