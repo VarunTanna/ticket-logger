@@ -44,3 +44,16 @@ export const REMOVE_TICKETS = gql`
     }
   }
 `;
+
+export const CREATE_PROJECT = gql`
+  mutation createProject($name: String!, $rep: String!, $groupId: String!) {
+    createProject(name: $name, rep: $rep, groupId: $groupId) {
+      _id
+      name
+      rep
+      group {
+        name
+      }
+    }
+  }
+`;
