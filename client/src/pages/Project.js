@@ -25,10 +25,9 @@ const Project = ({
             </tr>
             {project && project.map((project) => (
              <tr>
-               <td>{project.description}</td>
-               <td>{project.project}</td>
-               <td>{project.order}</td>
-               <td>{project.duedate}</td>
+               <td>{project.name}</td>
+               <td>{project.repo}</td>
+               <td>{project.group}</td>
              </tr> 
             ))}
           </table>

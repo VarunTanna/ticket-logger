@@ -7,8 +7,9 @@ const resolvers = {
     users: async () => {
       return User.find();
     },
-    user: async (parent, { email }) => {
-      return User.findOne({ email });
+    user: async (parent, args) => {
+      console.log(args);
+      return User.findById(args.userId);
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -26,7 +27,13 @@ const resolvers = {
       return Ticket.find();
     },
     ticket: async (parent, { ticketId }) => {
-      return TicketfindOne({ _id: ticketId });
+      return Ticket.findOne({ _id: ticketId });
+    },
+    projects: async () => {
+      return Project.find();
+    },
+    project: async (parent, { ticketId }) => {
+      return Project.findOne({ _id: ticketId });
     },
   },
 
@@ -34,36 +41,31 @@ const resolvers = {
     addUser: async (parent, { email, password, github }) => {
       console.log("attempting to create user", email);
       const user = await User.create({ email, password, github });
-      console.log("created",user);
+      console.log("created", user);
       const token = signToken(user);
       return { token, user };
     },
-    deleteUser: async (parent, {email, password, github}) => {
+    deleteUser: async (parent, { email, password, github }) => {
       console.log('attempting to delete user', email);
-       const user = await User.findOneAndRemove({ email, password, github});
-       console.log('deleted', user);
-       const token = deleteToken(user);
-       return {token, user};
-      
+      const user = await User.findOneAndRemove({ email, password, github });
+      console.log('deleted', user);
+      const token = deleteToken(user);
+      return { token, user };
+
     },
-    updateUser(parent, {_id})  {
+    updateUser: async (parent, args) => {
       const user = await User.findOneAndUpdate(
-        { _id},
-        { $set: req.body},
-        { runValidators: true, new: true}
+        { _id: args._id },
+        { $set: {email: args.email, password: args.password, github: args.github} },
+        { runValidators: true, new: true }
       )
 
       return user;
-      
-    },
-    addTicket: async (parent, { name, email, password }) => {
-      const ticket = await Ticket.create({ name, email, password });
-      const token = signToken(ticket);
 
-      return { token, ticket };
     },
+
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne( {email} );
 
       if (!user) {
         throw new AuthenticationError('No profile with this email found!');
@@ -79,91 +81,23 @@ const resolvers = {
       return { token, user };
     },
 
-    // Add a third argument to the resolver to access data in our `context`
-    addTickets: async (parent, { ticketsId, tickets }, context) => {
-      // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
-      if (context.user) {
-        return Ticket.findOneAndUpdate(
-          { _id: ticketsId },
-          {
-            $addToSet: { tickets: tickets },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      // If user attempts to execute this mutation and isn't logged in, throw an error
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    updateTicket: async (parent, {_id}) => {
-      const ticket = await Ticket.findOneAndUpdate( 
-        
-        {_id},
-        { $set: req.body},
-        { runValidators: true, new: true}
-      )
-      return ticket;
-    },
-      
-    // Set up mutation so a logged in user can only remove their profile and no one else's
-    removeTicket: async (parent, args, context) => {
-      if (context.user) {
-        return Ticket.findOneAndDelete({ _id: context.user._id });
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    // Make it so a logged in user can only remove a skill from their own profile
-    removeTicket: async (parent, { ticket }, context) => {
-      if (context.user) {
-        return Ticket.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { ticket: ticket } },
-          { new: true }
-        );
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    createTicket: async (parent, {ticketId, ticket }, context) => {
+    createTicket: async (parent, args, context) => {
       if(context.user) {
-        return Ticket.create(
-          { _id: ticketId},
-          { $addToSet: { ticket: ticket}},
-          { new: true, runValidators: true}
-        );
+        return Ticket.create({...args, user: context.user});
       }
-
-      throw new AuthenticationError('No user created')
+      throw new AuthenticationError('No ticket created')
     },
-    createGroup: async (parent, {_id}) => {
-    const group = await Group.create(
-      {_id},
-      {$set: { group, user}},
-      {new: true}
-    );
-
-    
-    return group;
-    },
-  //delete group
-     async deleteGroup (parent, {_id}) {
-      const group = await Group.deleteOne(
-       {_id}
-      );
-
-     return group;
-      }
-    },
-    }
-    createProject: async (parent, {projectId, project}, context) => {
+    createProject: async (parent, args, context) => {
       if(context.user) {
         return Project.create(
-          { _id: projectId},
-          { $addToSet: { project: project}},
-          { new: true, runValidators: true}
-        );
+          { _id: args._id},
+          { $addToSet: { project: {...args}}},
+          { new: true, runValidators: true})
       }
+    },
+    createGroup: async (parent, args, context) => {
+      const group = await Group.create({...args, user: context.user});
+      return group;
     },
   }
 };
