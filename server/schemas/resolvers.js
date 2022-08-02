@@ -63,20 +63,20 @@ const resolvers = {
       return { token, ticket };
     },
     login: async (parent, { email, password }) => {
-      const ticket = await Ticket.findOne({ email });
+      const user = await User.findOne({ email });
 
-      if (!ticket) {
+      if (!user) {
         throw new AuthenticationError('No profile with this email found!');
       }
 
-      const correctPw = await ticket.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password!');
       }
 
-      const token = signToken(ticket);
-      return { token, ticket };
+      const token = signToken(user);
+      return { token, user };
     },
 
     // Add a third argument to the resolver to access data in our `context`
