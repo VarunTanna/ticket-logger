@@ -41,16 +41,29 @@ const resolvers = {
     addUser: async (parent, { email, password, github }) => {
       console.log("attempting to create user", email);
       const user = await User.create({ email, password, github });
-      console.log("created",user);
+      console.log("created", user);
       const token = signToken(user);
       return { token, user };
     },
-    addTicket: async (parent, { name, email, password }) => {
-      const ticket = await Ticket.create({ name, email, password });
-      const token = signToken(ticket);
+    deleteUser: async (parent, { email, password, github }) => {
+      console.log('attempting to delete user', email);
+      const user = await User.findOneAndRemove({ email, password, github });
+      console.log('deleted', user);
+      const token = deleteToken(user);
+      return { token, user };
 
-      return { token, ticket };
     },
+    updateUser: async (parent, { _id }) => {
+      const user = await User.findOneAndUpdate(
+        { _id },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      )
+
+      return user;
+
+    },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -86,14 +99,17 @@ const resolvers = {
       // If user attempts to execute this mutation and isn't logged in, throw an error
       throw new AuthenticationError('You need to be logged in!');
     },
-    // Set up mutation so a logged in user can only remove their profile and no one else's
-    removeTicket: async (parent, args, context) => {
-      if (context.user) {
-        return Ticket.findOneAndDelete({ _id: context.user._id });
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    updateTicket: async (parent, { _id }) => {
+      const ticket = await Ticket.findOneAndUpdate(
+
+        { _id },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      )
+      return ticket;
     },
-    // Make it so a logged in user can only remove a skill from their own profile
+
+    // Make it so a logged in user can only remove a ticket
     removeTicket: async (parent, { ticket }, context) => {
       if (context.user) {
         return Ticket.findOneAndUpdate(
@@ -104,16 +120,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    // createTicket: async (parent, {ticketId, ticket }, context) => {
-    //   if(context.user) {
-    //     return Ticket.create(
-    //       { _id: ticketId},
-    //       { $addToSet: { ticket: ticket}},
-    //       { new: true, runValidators: true}
-    //     );
-    //   }
-    //   throw new AuthenticationError('No ticket created')
-    // },
+
     createTicket: async (parent, args, context) => {
       if(context.user) {
         return Ticket.create({...args, user: context.user});
@@ -126,10 +133,23 @@ const resolvers = {
           { _id: projectId},
           { $addToSet: { project: project}},
           { new: true, runValidators: true}
-        );
       }
-      throw new AuthenticationError('No ticket created')
-    }
+    },
+    createGroup: async (parent, { _id }) => {
+      const group = await Group.create(
+        { _id },
+        { $set: { group, user } },
+        { new: true }
+      );
+      return group;
+    },
+    //delete group
+    async deleteGroup(parent, { _id }) {
+      const group = await Group.deleteOne(
+        { _id }
+      );
+      return group;
+    },
   }
 };
 

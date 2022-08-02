@@ -53,7 +53,7 @@ export const QUERY_GROUP_USERS = gql`
 `;
 
 export const QUERY_GROUP_TICKETS = gql`
-  query group {
+  query groupTickets {
     group {
       _id
       email
@@ -75,8 +75,7 @@ query userTickets($email: String!) {
       github
       tickets { 
       _id
-      name
-      tickets
+      title
     }
     }
   }
@@ -89,5 +88,4 @@ export const QUERY_PROJECTS = gql`
       name
       rep
     }
-  }
 `;
