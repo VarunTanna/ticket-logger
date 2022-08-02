@@ -31,6 +31,7 @@ const typeDefs = gql`
     email: String
     password: String
     github: String
+    #groups: [Group]
   }
 
   type Auth {
@@ -52,17 +53,20 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(email: String!, password: String!, github: String!): Auth
-    deleteUser(email: String!, password: String!, github: String!): Auth
-    addTicket(name: String!, email: String!, password: String!): Auth
+    #deleteUser(email: String!, password: String!, github: String!): Auth
+    deleteUser: User
+    updateUser(email: String!, password: String!, github: String!): Auth
     login(email: String!, password: String!): Auth
-    createTicket(ticket: ID! tickets: String!): Ticket
 
+    createTicket(ticket: ID! tickets: String!): Ticket
+    addTickets(ticketId: ID!, tickets: String!): Ticket
+    updateTicket(ticketId: ID!, tickets: String!): Ticket
+    removeTicket: Ticket
 
     createProject(name: String!, rep: String!, groupId: ID!): Project
-
-    addTickets(ticketId: ID!, tickets: String!): Ticket
-    removeTicket: Ticket
-    removeTickets(tickets: String!): Ticket
+   
+    createGroup(name: String!): Ticket
+    deleteGroup: Group
   }
 `;
 
