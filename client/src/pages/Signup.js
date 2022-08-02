@@ -21,7 +21,7 @@ const Signup = () => {
     setFormState({
       email: formState.email.toLowerCase(),
       password: formState.password,
-      github: formState.github.toLowerCase(),
+      github: formState.github,
       [name]: value,
     });
     //console.log(name, value, event, formState)
