@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Ticket, Group } = require('../models');
+const { User, Ticket, Group, Project } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -16,7 +16,12 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
+    group: async (parent, args, context) => {
+      return Group.find(args.users);
+    },
+    groups: async () => {
+      return Group.find();
+    },
     tickets: async () => {
       return Ticket.find();
     },
@@ -128,6 +133,7 @@ const resolvers = {
           { new: true, runValidators: true}
         );
       }
+
       throw new AuthenticationError('No user created')
     },
     createGroup: async (parent, {_id}) => {
@@ -148,6 +154,18 @@ const resolvers = {
 
      return group;
     },
+      throw new AuthenticationError('No ticket created')
+    },
+    createProject: async (parent, {projectId, project}, context) => {
+      if(context.user) {
+        return Project.create(
+          { _id: projectId},
+          { $addToSet: { project: project}},
+          { new: true, runValidators: true}
+        );
+      }
+      throw new AuthenticationError('No ticket created')
+    }
   }
 };
 
