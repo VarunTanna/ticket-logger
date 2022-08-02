@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import TicketsList from "../components/TicketsList";
 import TicketForm from "../components/TicketForm";
+import Auth from '../utils/auth';
 
 const User = () => {
   const { username: userParam } = useParams();
@@ -12,7 +13,7 @@ const User = () => {
 
   const user = data?.me || data?.user || {};
   // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  if (Auth.loggedIn() && Auth.getUser().data.username === userParam) {
     return <Navigate to="/me" />;
   }
 

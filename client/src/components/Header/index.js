@@ -25,6 +25,12 @@ const Header = () => {
               <Link className="btn btn-lg btn-primary m-2" to="/me">
                 View My Tickets
               </Link>
+              <Link className="btn btn-lg btn-primary m-2" to="/groups">
+                My Groups
+              </Link>
+              <Link className="btn btn-lg btn-primary m-2" to="/projects">
+                My Projects
+              </Link>
               <button className="btn btn-lg btn-light m-2" onClick={logout}>
                 Logout
               </button>

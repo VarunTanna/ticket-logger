@@ -27,9 +27,10 @@ export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
-      ticket {
+      user {
         _id
-        name
+        email
+        github
       }
     }
   }
@@ -41,6 +42,19 @@ export const REMOVE_TICKETS = gql`
       _id
       name
       tickets
+    }
+  }
+`;
+
+export const CREATE_PROJECT = gql`
+  mutation createProject($name: String!, $rep: String!, $groupId: String!) {
+    createProject(name: $name, rep: $rep, groupId: $groupId) {
+      _id
+      name
+      rep
+      group {
+        name
+      }
     }
   }
 `;
