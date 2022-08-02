@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-
+import { Link } from 'react-router-dom';
 import { QUERY_PROJECTS } from '../utils/queries';
 
 const Project = () => {
@@ -18,15 +18,13 @@ if (!projects.length) {
   );
 }
   return (
-    <div>
-      <div className="projectTable">
           <table>
             <tr>
               <th>Name</th>
               <th>Repo</th>
               <th>Group</th>
             </tr>
-            {project && project.map((project) => (
+            {projects && projects.map((project) => (
              <tr>
                <td>{project.name}</td>
                <td>{project.repo}</td>
@@ -34,8 +32,6 @@ if (!projects.length) {
              </tr> 
             ))}
           </table>
-        </div>
-    </div>
   )
   }
 
