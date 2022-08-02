@@ -46,7 +46,7 @@ const resolvers = {
        return {token, user};
       
     },
-    updateUser(parent, {_id})  {
+    updateUser: async (parent, {_id}) => {
       const user = await User.findOneAndUpdate(
         { _id},
         { $set: req.body},
@@ -132,9 +132,6 @@ const resolvers = {
           { $addToSet: { ticket: ticket}},
           { new: true, runValidators: true}
         );
-      }
-
-      throw new AuthenticationError('No user created')
     },
     createGroup: async (parent, {_id}) => {
     const group = await Group.create(
@@ -154,18 +151,15 @@ const resolvers = {
 
      return group;
     },
-      throw new AuthenticationError('No ticket created')
-    },
     createProject: async (parent, {projectId, project}, context) => {
-      if(context.user) {
-        return Project.create(
-          { _id: projectId},
-          { $addToSet: { project: project}},
-          { new: true, runValidators: true}
-        );
-      }
-      throw new AuthenticationError('No ticket created')
-    }
+      const project = await Project.create(
+        {_id: projectId},
+        { $addToSet: {project: project}},
+        {new: true, runValidators: true}
+      )
+
+      return project;
+    },
   }
 };
 

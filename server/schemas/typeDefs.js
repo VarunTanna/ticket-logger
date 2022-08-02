@@ -52,9 +52,12 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(email: String!, password: String!, github: String!): Auth
+    deleteUser(email: String!, password: String!, github: String!): Auth
     addTicket(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createTicket(ticket: ID! tickets: String!): Ticket
+
+
     createProject(name: String!, rep: String!, groupId: ID!): Project
 
     addTickets(ticketId: ID!, tickets: String!): Ticket
