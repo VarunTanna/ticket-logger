@@ -86,7 +86,7 @@ export const QUERY_PROJECTS = gql`
     projects {
       _id
       name
-      rep
+      repo
     }
   }
 `;

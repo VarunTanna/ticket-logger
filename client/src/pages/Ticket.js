@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 
 import TicketList from "../pages/Tickets";
-
+import { Navigate, useParams } from 'react-router-dom';
 import { QUERY_SINGLE_TICKET } from '../utils/queries';
 
 
