@@ -19,6 +19,10 @@ if (!projects.length) {
   );
 }
   return (
+    <>
+    <Link className="btn btn-sm btn-primary m-2" to="/newProject">
+           Add a Project
+           </Link>
           <table>
             <tr>
               <th>Name</th>
@@ -33,6 +37,7 @@ if (!projects.length) {
              </tr> 
             ))}
           </table>
+           </>
   )
   }
 
