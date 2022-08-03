@@ -27,11 +27,11 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_PROJECT = gql`
-  mutation createProject($name: String!, $rep: String!, $groupId: String!) {
-    createProject(name: $name, rep: $rep, groupId: $groupId) {
+  mutation createProject($name: String!, $repo: String!, $groupId: ID!) {
+    createProject(name: $name, repo: $repo, groupId: $groupId) {
       _id
       name
-      rep
+      repo
       group {
         name
       }
