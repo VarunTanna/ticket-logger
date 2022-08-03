@@ -40,18 +40,22 @@ function NewGroup() {
     for (let i = 0; i < e.length; i++) {
       let user = e[i].value;
       groupUsers.push(user);
+      console.log(groupUsers)
     };
-
+    //groupUsers = groupUsers => [...new Set(groupUsers)];
   };
 
-  
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(formData);
     console.log(groupUsers);
+    let uniqueUsers = groupUsers.filter(onlyUnique);
     const { data } = createGroup({
-      variables: { name: groupName, users: groupUsers }
+      variables: { name: groupName, users: uniqueUsers }
     });
   };
 
