@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { QUERY_PROJECTS } from '../utils/queries';
 
 const Project = () => {
-  const projects = useQuery(QUERY_PROJECTS);
+  const {loading, data} = useQuery(QUERY_PROJECTS);
+  const projects = data?.projects || [];
   console.log(projects);
 
 if (!projects.length) {
