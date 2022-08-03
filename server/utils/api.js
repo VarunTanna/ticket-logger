@@ -17,17 +17,7 @@ const getGitRepos = (users) => {
 
 const doesGitUserExist = async (id) => {
     const url = `https://api.github.com/users/${id}`;
-    console.log('making call to',url)
     return await fetchSuccess(url)
-    console.log('return',rawReturn)
-    return false
-    //return (rawReturn.indexOf('Not Found')!=-1);
-
-
-
-    // const url = `https://api.github.com/users/${id}`;
-    // const rawReturn = axios.get(url);
-    // return (rawReturn.indexOf('Not Found')!=-1);
 }
 
 const doesGitRepoExist = (repo) => {
@@ -39,9 +29,9 @@ const fetchSuccess = async (url) => {
   let ret=""
   try {
     ret=await axios.get(url);
-    console.log('axios return',ret)
+    //console.log('axios return',ret)
   } catch (err) {
-    console.log('fetch error',err)
+    //console.log('fetch error',err)
   }
   return ret
 }
