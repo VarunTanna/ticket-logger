@@ -2,6 +2,8 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
+import { useMutation } from "@apollo/client";
+import { DELETE_GROUP } from "../utils/mutations";
 
 const MyGroups = () => {
   const {loading, data} = useQuery(QUERY_GROUPS);
@@ -9,6 +11,15 @@ const MyGroups = () => {
   const groups = data?.groups || [];
 
   console.log(groups);
+
+  const [deleteGroup, { error }] = useMutation(DELETE_GROUP);
+
+  const handleDelete = (id) => {
+    let group = deleteGroup({
+      variables: { groupId: id }
+    });
+    return group;
+  };
 
   if (!groups.length) {
     return (
@@ -29,20 +40,24 @@ const MyGroups = () => {
       <table>
         <tr>
           <th>ID</th>
-          <br></br>
+          
           <th>Name</th>
-          <br></br>
+          
           <th>Users</th>
+          
+          <th>Delete</th>
         </tr>
       {groups && groups.map((group) => (
           <tr>
             <td>{group._id}</td>
-            <br></br>
+            
             <td>{group.name}</td>
-            <br></br>
+            
             {
               group.users.map(user=><td>{user.email}</td>)
             }
+            
+            <td><button className="delete" onClick={handleDelete(group._id)}>delete</button></td>
           </tr>
       ))}
       </table>

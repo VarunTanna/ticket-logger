@@ -106,6 +106,10 @@ const resolvers = {
       group = await group.populate('users');
       return group;
     },
+    deleteGroup: async (parent, { groupId }, context) => {
+      const group = Group.findByIdAndDelete(groupId);
+      return group;
+    }
   }
 };
 

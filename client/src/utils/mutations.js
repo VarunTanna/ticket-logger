@@ -62,3 +62,12 @@ export const CREATE_GROUP = gql`
     }
   }
 `;
+
+export const DELETE_GROUP = gql`
+  mutation deleteGroup($groupId: ID!) {
+    deleteGroup(groupId: $groupId) {
+      _id
+      name
+    }
+  }
+`;

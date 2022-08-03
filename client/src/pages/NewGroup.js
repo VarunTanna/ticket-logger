@@ -4,6 +4,7 @@ import { CREATE_GROUP } from "../utils/mutations";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_USERS } from "../utils/queries";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 function NewGroup() {
 
@@ -44,7 +45,7 @@ function NewGroup() {
 
   };
 
-  
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,6 +54,10 @@ function NewGroup() {
     const { data } = createGroup({
       variables: { name: groupName, users: groupUsers }
     });
+
+    // navigates user back to list of groups when submit button is clicked
+    navigate('/myGroups');
+
   };
 
   return (
