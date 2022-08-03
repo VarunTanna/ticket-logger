@@ -15,19 +15,16 @@ function NewGroup() {
   const userOptions = [];
 
   for (let i=0; i < userList.length; i++) {
-    let option = { key: userList[i]._id, value: userList[i].email, label: userList[i].email };
+    // let option = { key: userList[i]._id, value: userList[i].email, label: userList[i].email };
+    let option = { value: userList[i]._id, label: userList[i].email };
     userOptions.push(option);
   };
 
   console.log(userOptions);
 
   const [groupName, setGroupName] = useState('');
-  const [groupUsers, setGroupUsers] = useState('');
-
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   users: '',
-  // });
+  // const [groupUsers, setGroupUsers] = useState('');
+  const groupUsers = [];
 
   const [createGroup, { error }] = useMutation(CREATE_GROUP);
 
@@ -35,15 +32,26 @@ function NewGroup() {
     const { name, value } = e.target;
     // setFormData({ ...formData, [name]: value });
     setGroupName(value);
-    setGroupUsers(value);
   };
+
+  const handleChange = (e) => {
+    console.log(e);
+
+    for (let i = 0; i < e.length; i++) {
+      let user = e[i].value;
+      groupUsers.push(user);
+    };
+
+  };
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(formData);
     console.log(groupUsers);
     const { data } = createGroup({
-      variables: { name: groupName, users: [groupUsers] }
+      variables: { name: groupName, users: groupUsers }
     });
   };
 
@@ -70,7 +78,7 @@ function NewGroup() {
             );
           })}
         </select> */}
-        <Select options={userOptions} isMulti/>
+        <Select options={userOptions} onChange={handleChange} isMulti/>
         <button type="button" onClick={handleSubmit} className="submit">
           Submit
         </button>

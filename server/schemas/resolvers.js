@@ -21,7 +21,7 @@ const resolvers = {
       return Group.find(args.users);
     },
     groups: async () => {
-      return Group.find();
+      return Group.find().populate('users');
     },
     tickets: async () => {
       return Ticket.find();
@@ -96,7 +96,8 @@ const resolvers = {
       }
     },
     createGroup: async (parent, args, context) => {
-      const group = await Group.create({...args});
+      let group = await Group.create({...args});
+      group = await group.populate('users');
       return group;
     },
   }

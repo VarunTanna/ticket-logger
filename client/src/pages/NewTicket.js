@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { CREATE_TICKET } from '../utils/mutations'
 import { QUERY_PROJECTS } from '../utils/queries'
+import Select from "react-select";
 
 function NewTicket() {
 
@@ -11,6 +12,13 @@ function NewTicket() {
   const projectList = data?.projects || [];
 
   console.log(projectList);
+
+  const projectOptions = [];
+
+  for (let i=0; i < projectList.length; i++) {
+    let option = { key: projectList[i]._id, value: projectList[i].email, label: projectList[i].email };
+    projectOptions.push(option);
+  };
 
   const [formData, setFormData] = useState({
     title: '',
@@ -69,7 +77,7 @@ function NewTicket() {
                   style={style.input}
               />
               <label>Project:</label>
-              <select name="project" onChange={inputChange}>
+              {/* <select name="project" onChange={inputChange}>
                 {projectList.map((project) => {
                   return (
                     <option key={project._id} value={project.name}>
@@ -77,7 +85,8 @@ function NewTicket() {
                     </option>
                   );
                 })}
-              </select>
+              </select> */}
+              <Select options={projectOptions} isMulti/>
               <br></br>
               {/* <input 
                   value={project}

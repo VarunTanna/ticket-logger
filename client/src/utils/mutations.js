@@ -53,7 +53,7 @@ export const CREATE_TICKET = gql`
 `;
 
 export const CREATE_GROUP = gql`
-  mutation createGroup($name: String!, $users:[User]!) {
+  mutation createGroup($name: String!, $users:[String]!) {
     createGroup(name: $name, users: $users) {
       name
       users {
