@@ -28,21 +28,21 @@ const MyGroups = () => {
         </Link>
       <table>
         <tr>
-          <th>ID</th>
-          <br></br>
           <th>Name</th>
-          <br></br>
           <th>Users</th>
+          <th>Delete Group</th>
         </tr>
       {groups && groups.map((group) => (
           <tr>
-            <td>{group._id}</td>
-            <br></br>
             <td>{group.name}</td>
-            <br></br>
+            <td>
             {
-              group.users.map(user=><td>{user.email}</td>)
+              group.users.map(user=><span className='btn m-1'>{user.email}</span>)
             }
+            </td>
+            <td>
+              <a href='nowhere/${group._id}'><img src='delete.png' alt='Delete group ${group.name}'></img></a>
+            </td>
           </tr>
       ))}
       </table>
