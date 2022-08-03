@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Ticket, Group, Project } = require('../models');
 const { signToken } = require('../utils/auth');
+const api = require('../utils/api');
 
 const resolvers = {
   Query: {
@@ -39,11 +40,16 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { email, password, github }) => {
-      console.log("attempting to create user", email);
-      const user = await User.create({ email, password, github });
-      console.log("created", user);
-      const token = signToken(user);
-      return { token, user };
+      console.log("calling doesGitUserExist",await api.doesGitUserExist(github));
+      if(await api.doesGitUserExist(github)){
+        const user = await User.create({ email, password, github });
+        console.log("created", user);
+        const token = signToken(user);
+        return { token, user };  
+      } else {
+        throw new AuthenticationError('GitHub user verification failed')
+      }
+      
     },
     deleteUser: async (parent, { email, password, github }) => {
       console.log('attempting to delete user', email);

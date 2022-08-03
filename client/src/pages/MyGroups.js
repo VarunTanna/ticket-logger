@@ -10,19 +10,6 @@ const MyGroups = () => {
 
   console.log(groups);
 
-  // const groupUsers = [];
-  
-  // for (let i = 0; i < groups.length; i++) {
-  //   let users = groups[i].users;
-  //   for (let i = 0; i < users.length; i++) {
-    
-  //   let userEmail = users[i].email;
-  //   groupUsers.push(userEmail);
-  //   }
-  // };
-
-  // console.log(groupUsers);
-
   if (!groups.length) {
     return (
       <>
@@ -33,33 +20,7 @@ const MyGroups = () => {
       </>
     );
   }
-
-  // {groups && groups.map((group) => {
-  //   return (
-  //     <>
-  //       <table>
-  //         <tr>
-  //           <th>ID</th>
-  //           <th>Name</th>
-  //           <th>Users</th>
-  //         </tr>
-  //           <tr>
-  //             <td>{group._id}</td>
-  //             <td>{group.name}</td>
-  //             {
-  //               for (i=0; i < group.users.length; i++) {
-  //                 let emails = [];
-  //                 let email = group.users[i].email;
-  //                 emails.push(email);
-  //                 return <td>{emails}</td>
-  //               }
-  //             }
-  //           </tr>
-  //       </table>
-  //     </>
-  //   )
-  // })}
-
+  
   return (
     <>
         <Link className="btn btn-lg btn-primary m-2" to="/newGroup">

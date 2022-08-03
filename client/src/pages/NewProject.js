@@ -16,7 +16,7 @@ function NewProject() {
     name: '',
     repo: '',
     group: ''
-  })
+  });
 
   const [createProject, {error}] = useMutation(CREATE_PROJECT);
 
@@ -35,7 +35,7 @@ function NewProject() {
 
   return (
       <>
-          <h1 className="contactTitle">Create a Project</h1>
+          <h1>Create a Project</h1>
           <form className="form" style={style.form}>
               <label>Name:</label>
               <input 
