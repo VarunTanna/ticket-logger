@@ -21,7 +21,7 @@ const typeDefs = gql`
   type Project {
     _id: ID
     name: String
-    rep: String
+    repo: String
     group: Group
     tickets: [Ticket]
   }
@@ -61,7 +61,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
 
     createTicket(title: String!, description: String!, type: String!, project: String!, order: Int!, duedate: String!): Ticket
-    createProject(name: String!, rep: String!, groupId: ID!): Project
+    createProject(name: String!, repo: String!, groupId: ID!): Project
    
     createGroup(name: String!): Group
   }
