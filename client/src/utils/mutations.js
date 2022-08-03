@@ -53,13 +53,12 @@ export const CREATE_TICKET = gql`
 `;
 
 export const CREATE_GROUP = gql`
-  mutation createGroup($name: String!, $users:[String]!) {
+  mutation createGroup($name: String!, $users:[User]!) {
     createGroup(name: $name, users: $users) {
       name
       users {
         email
-        github
-      }
+      } 
     }
   }
 `;

@@ -96,7 +96,7 @@ const resolvers = {
       }
     },
     createGroup: async (parent, args, context) => {
-      const group = await Group.create({...args, user: context.user});
+      const group = await Group.create({...args});
       return group;
     },
   }

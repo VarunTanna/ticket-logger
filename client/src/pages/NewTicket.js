@@ -105,6 +105,7 @@ function NewTicket() {
                   onChange={inputChange}
                   style={style.input}
               />
+              <br></br>
               <button type="button" onClick={handleSubmit} className="submit">
                   Submit
               </button>
