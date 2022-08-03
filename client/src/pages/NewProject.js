@@ -16,28 +16,36 @@ function NewProject() {
   const groupOptions = [];
 
   for (let i=0; i < groupList.length; i++) {
-    let option = { key: groupList[i]._id, value: groupList[i].name, label: groupList[i].users };
+    let option = { key: groupList[i]._id, value: groupList[i]._id, label: groupList[i].name };
     groupOptions.push(option);
   };
 
-  const [formData, setFormData] = useState({
-    name: '',
-    repo: '',
-    group: ''
-  });
+  const [projectName, setProjectName] = useState('');
+  const [projectRepo, setProjectRepo] = useState('');
+  const [projectGroupId, setProjectGroupId] = useState();
 
   const [createProject, {error}] = useMutation(CREATE_PROJECT);
 
-  const inputChange = (e) => {
+  const inputChangeA = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setProjectName(value);
+  };
+
+  const inputChangeB = (e) => {
+    const { name, value } = e.target;
+    setProjectRepo(value);
+  };
+
+  const handleChange = (e) => {
+    console.log(e);
+    setProjectGroupId(e.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      
+    console.log(projectRepo);
     const { data } = createProject({
-      variables: { ...formData }
+      variables: { groupId: projectGroupId, name: projectName, repo: projectRepo }
     });
   }
 
@@ -47,21 +55,21 @@ function NewProject() {
           <form className="form" style={style.form}>
               <label>Name:</label>
               <input 
-                  value={formData.name}
+                  value={projectName}
                   name="name"
                   type="text"
                   placeholder="project name"
-                  onChange={inputChange}
+                  onChange={inputChangeA}
                   style={style.input}
               />
               <label>Repository:</label>
               <textarea 
                   rows={4}
-                  value={formData.repo}
+                  value={projectRepo}
                   name="repo"
                   type="textarea"
                   placeholder="enter github repo"
-                  onChange={inputChange}
+                  onChange={inputChangeB}
                   style={style.input}
               />
               <label>Group:</label>
@@ -74,7 +82,7 @@ function NewProject() {
                   );
                 })}
               </select> */}
-              <Select options={groupOptions} isMulti/>
+              <Select options={groupOptions} onChange={handleChange}/>
               <br></br>
               <button type="button" onClick={handleSubmit} className="submit">
                   Submit
