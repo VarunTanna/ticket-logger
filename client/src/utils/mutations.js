@@ -58,8 +58,7 @@ export const CREATE_GROUP = gql`
       name
       users {
         email
-        github
-      }
+      } 
     }
   }
 `;

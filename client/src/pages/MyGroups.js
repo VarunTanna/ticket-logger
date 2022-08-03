@@ -4,7 +4,10 @@ import { QUERY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
 
 const MyGroups = () => {
-  const groups = useQuery(QUERY_GROUPS);
+  const {loading, data} = useQuery(QUERY_GROUPS);
+  console.log(data);
+  const groups = data?.groups || [];
+
   console.log(groups);
 
   if (!groups.length) {
@@ -17,21 +20,31 @@ const MyGroups = () => {
       </>
     );
   }
+  
   return (
     <>
+        <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
+        Create a Group
+        </Link>
       <table>
         <tr>
           <th>ID</th>
+          <br></br>
           <th>Name</th>
+          <br></br>
           <th>Users</th>
         </tr>
-        {groups && groups.map((group) => (
+      {groups && groups.map((group) => (
           <tr>
             <td>{group._id}</td>
+            <br></br>
             <td>{group.name}</td>
-            <td>{group.users}</td>
+            <br></br>
+            {
+              group.users.map(user=><td>{user.email}</td>)
+            }
           </tr>
-        ))}
+      ))}
       </table>
     </>
   )

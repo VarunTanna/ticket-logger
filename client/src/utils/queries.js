@@ -53,7 +53,7 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_GROUPS = gql`
-  query groups{
+  query groups {
     groups {
       _id
       name
@@ -109,7 +109,7 @@ export const QUERY_PROJECTS = gql`
     projects {
       _id
       name
-      repo
+      rep
     }
   }
 `;
