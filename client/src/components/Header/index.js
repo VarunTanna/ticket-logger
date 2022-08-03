@@ -13,12 +13,13 @@ const Header = () => {
       <div className="container flex-column justify-space-between-lg justify-center align-center text-center">
         <Link className="text-dark" to="/">
           <h1 className="m-0" style={{ fontSize: "3rem" }}>
-            Ticket Logger
+            Ticket Logger 
           </h1>
+          <img width='80px' src='logo192.png' ></img>
         </Link>
-        <p className="m-0" style={{ fontSize: "1.75rem", fontWeight: "700" }}>
+        {/* <p className="m-0" style={{ fontSize: "1.75rem", fontWeight: "700" }}>
           Check your ticket status!
-        </p>
+        </p> */}
         <div>
           {Auth.loggedIn() ? (
             <>
