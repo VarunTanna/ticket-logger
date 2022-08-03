@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { QUERY_PROJECTS } from '../utils/queries';
 
 const Project = () => {
-  const projects = useQuery(QUERY_PROJECTS);
+  const {loading, data} = useQuery(QUERY_PROJECTS);
+  const projects = data?.projects || [];
   console.log(projects);
 
 if (!projects.length) {
@@ -18,6 +19,10 @@ if (!projects.length) {
   );
 }
   return (
+    <>
+    <Link className="btn btn-sm btn-primary m-2" to="/newProject">
+           Add a Project
+           </Link>
           <table>
             <tr>
               <th>Name</th>
@@ -32,6 +37,7 @@ if (!projects.length) {
              </tr> 
             ))}
           </table>
+           </>
   )
   }
 
