@@ -12,13 +12,15 @@ import Home from './pages/Home';
 // import User from './pages/User';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-//import Project from './pages/Project';
+import Project from './pages/Project';
+import NewProject from './pages/NewProject';
 import TicketsList from './pages/Tickets';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import NewTicket from './pages/NewTicket';
 import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
+// import Tickets from './pages/Tickets';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -77,26 +79,30 @@ function App() {
                 path="/newGroup"
                 element={<NewGroup />}
               />
-              {/* <Route 
+              {/* { <Route 
                 path="/me" 
                 element={<User />} 
-              /> */}
-              {/* <Route 
+              /> } 
+               { <Route 
                 path="/profiles/:profileId" 
                 element={<Profile />} 
-              /> */}
-              {/* <Route 
+              /> }  */}
+               {/* { <Route 
                 path="/tickets" 
                 element={<Tickets />} 
-              />
+              />}  */}
               <Route 
-                path="/projects/" 
+                path="/newProject/" 
+                element={<NewProject />} 
+              />
+               <Route 
+                path="/Project/" 
                 element={<Project />} 
               />
-              <Route 
+              {/* <Route 
                 path="/groups/" 
                 element={<Group />} 
-              /> */}
+              />  */}
             </Routes>
           </div>
           <Footer />
