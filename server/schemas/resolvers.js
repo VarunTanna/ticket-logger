@@ -31,7 +31,7 @@ const resolvers = {
       return Ticket.findOne({ _id: ticketId });
     },
     projects: async () => {
-      return Project.find();
+      return Project.find().populate('group');
     },
     project: async (parent, { ticketId }) => {
       return Project.findOne({ _id: ticketId });
@@ -95,10 +95,10 @@ const resolvers = {
     },
     createProject: async (parent, args, context) => {
       if(context.user) {
-        return Project.create(
-          { _id: args._id},
-          { $addToSet: { project: {...args}}},
-          { new: true, runValidators: true})
+        console.log(args);
+        let project = await Project.create({...args});
+        project = await project.populate('group');
+        return project;
       }
     },
     createGroup: async (parent, args, context) => {

@@ -27,7 +27,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_PROJECT = gql`
-  mutation createProject($name: String!, $repo: String!, $groupId: String!) {
+  mutation createProject($name: String!, $repo: String!, $groupId: ID!) {
     createProject(name: $name, repo: $repo, groupId: $groupId) {
       _id
       name
