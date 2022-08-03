@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { CREATE_PROJECT } from '../utils/mutations'
 import { QUERY_GROUPS} from '../utils/queries'
+import Select from "react-select";
 
 function NewProject() {
 
@@ -11,6 +12,13 @@ function NewProject() {
   const groupList = data?.groups || [];
 
   console.log(groupList);
+
+  const groupOptions = [];
+
+  for (let i=0; i < groupList.length; i++) {
+    let option = { key: groupList[i]._id, value: groupList[i].name, label: groupList[i].users };
+    groupOptions.push(option);
+  };
 
   const [formData, setFormData] = useState({
     name: '',
@@ -57,7 +65,7 @@ function NewProject() {
                   style={style.input}
               />
               <label>Group:</label>
-              <select name="group" onChange={inputChange}>
+              {/* <select name="group" onChange={inputChange}>
                 {groupList.map((group) => {
                   return (
                     <option key={group._id} value={group.name}>
@@ -65,7 +73,8 @@ function NewProject() {
                     </option>
                   );
                 })}
-              </select>
+              </select> */}
+              <Select options={groupOptions} isMulti/>
               <br></br>
               <button type="button" onClick={handleSubmit} className="submit">
                   Submit
