@@ -17,7 +17,6 @@ const MyGroups = () => {
       </>
     );
   }
-
   return (
     <>
       <table>
