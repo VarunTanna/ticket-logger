@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
 
 const MyGroups = () => {
-  const { loading, data } = useQuery(QUERY_GROUPS);
+  const { loading, data, refetch } = useQuery(QUERY_GROUPS);
   console.log(data);
   const groups = data?.groups || [];
 
   console.log(groups);
+
+  useEffect(function() {
+    refetch();
+  })
 
   if (!groups.length) {
     return (

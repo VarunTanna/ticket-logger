@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { QUERY_PROJECTS } from '../utils/queries';
 
 const Project = () => {
-  const {loading, data} = useQuery(QUERY_PROJECTS);
+  const {loading, data, refetch} = useQuery(QUERY_PROJECTS);
   const projects = data?.projects || [];
   console.log(projects);
+
+  useEffect(function() {
+    refetch();
+  })
 
 if (!projects.length) {
   return (
