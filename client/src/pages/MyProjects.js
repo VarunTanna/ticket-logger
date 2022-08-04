@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
-// import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { QUERY_PROJECTS } from '../utils/queries';
-// import { DELETE_PROJECT } from "../utils/mutations";
+import { DELETE_PROJECT } from "../utils/mutations";
+import { useNavigate } from 'react-router-dom';
 
-const Project = () => {
+
+const MyProjects = () => {
   const { loading, data, refetch } = useQuery(QUERY_PROJECTS);
+  const [deleteProject, {error}] = useMutation(DELETE_PROJECT);
+  const navigate = useNavigate();
   const projects = data?.projects || [];
-  console.log(projects);
+  // console.log(projects);
 
   useEffect(function () {
     refetch();
@@ -23,6 +27,14 @@ const Project = () => {
         </Link>
       </>
     );
+  }
+  const handleDelete =  async (e) => {
+    e.preventDefault();
+    console.log("handle delete",e, e.key);
+    const { data } =  await deleteProject({
+      variables: { projectId: e.target.id }
+    });
+    navigate('/myprojects');
   }
 
   return (
@@ -43,10 +55,12 @@ const Project = () => {
           {projects && projects.map((project) => (
             <tr>
               <td className='btn m-1'>{project.name}</td>
-              <td>{project.repo}</td>
+              <td><a href={'https://github.com/' + project.repo} target='_blank'>{project.repo}</a></td>
               <td>{project.group}</td>
-              <td className='text-center'><a href={'nowhere/' + project._id}><img src='delete.png' alt={'Delete group ' + project.name}></img></a></td>
-            </tr>
+              <td className='text-center'>
+                <img id={project._id} onClick={handleDelete} src='delete.png' alt={'Delete project ' + project.name}></img>
+              </td>            
+              </tr>
           ))}
         </tbody>
       </table>
@@ -54,4 +68,4 @@ const Project = () => {
   )
 }
 
-export default Project;
+export default MyProjects;
