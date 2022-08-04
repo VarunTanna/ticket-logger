@@ -20,7 +20,8 @@ const resolvers = {
     //   }).populate({ path: ['users', 'projects'] }).populate( { path: 'tickets', populate: 'projects' } ));
     // },
     users_groups: async (parent, args, context) => {
-      console.log(context.user._id);
+      console.log(args);
+      console.log(context.user);
       return (
       Group.find({
         users: context.user

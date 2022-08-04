@@ -41,29 +41,29 @@ export const QUERY_SINGLE_TICKET = gql`
   }
 `;
 
-// export const QUERY_MY_GROUPS = gql`
-//   query users_groups($userId: ID!) {
-//     users_groups(userId: $userId) {
-//     _id
-//     name
-//     users {
-//       email
-//       }
-//     }
-//   }
-// `;
-
 export const QUERY_MY_GROUPS = gql`
   query users_groups {
     users_groups {
-      _id
-      name
-      users {
-        email
+    _id
+    name
+    users {
+      email
       }
     }
   }
 `;
+
+// export const QUERY_MY_GROUPS = gql`
+//   query users_groups {
+//     users_groups {
+//       _id
+//       name
+//       users {
+//         email
+//       }
+//     }
+//   }
+// `;
 
 export const QUERY_ME = gql`
   query me {
