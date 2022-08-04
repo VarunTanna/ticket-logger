@@ -65,6 +65,20 @@ export const CREATE_GROUP = gql`
   }
 `;
 
+// export const DELETE_PROJECT = gql`
+//   mutation deleteProject($name: String!, $repo: String!, $groupId: ID!) {
+//     deleteProject(name: $name, repo: $repo, groupId: $groupId) {
+//       _id
+//       name
+//       repo
+//       group {
+//         name
+//       }
+//     }
+//   }
+// `;
+
+
 export const DELETE_GROUP = gql`
   mutation deleteGroup($groupId: ID!) {
     deleteGroup(groupId: $groupId) {
@@ -73,3 +87,4 @@ export const DELETE_GROUP = gql`
     }
   }
 `;
+
