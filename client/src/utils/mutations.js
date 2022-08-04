@@ -45,7 +45,9 @@ export const CREATE_TICKET = gql`
       title
       description
       type
-      project
+      project {
+      name
+      }
       order
       duedate
     }
