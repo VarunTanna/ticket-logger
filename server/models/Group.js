@@ -6,9 +6,13 @@ const groupSchema = new Schema({
       required: true,
     },
     users: [{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-      }]
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      }],
+    projects: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Project',
+    }]
   });
   
   const Group = model('Group', groupSchema);
