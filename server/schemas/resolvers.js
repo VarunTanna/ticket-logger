@@ -113,11 +113,10 @@ const resolvers = {
     },
     createProject: async (parent, {name,repo,groupId}, context) => {
       if(context.user) {
-        console.log(args);
-        let repoName = args.repo.trim();
+        let repoName = repo.trim();
         if(repoName.toLowerCase().startsWith('https://github.com/')){
           repoName = repoName.substring(19);
-          args.repo = repoName;
+          repo = repoName;
         }
         if(await api.doesGitRepoExist(repoName)){
           let project = await Project.create({name,repo,group:groupId});
