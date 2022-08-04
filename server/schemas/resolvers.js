@@ -105,9 +105,18 @@ const resolvers = {
     createProject: async (parent, args, context) => {
       if(context.user) {
         console.log(args);
-        let project = await Project.create({...args});
-        project = await project.populate('group');
-        return project;
+        let repoName = args.repo.trim();
+        if(repoName.toLowerCase().startsWith('https://github.com/')){
+          repoName = repoName.substring(19);
+          args.repo = repoName;
+        }
+        if(await api.doesGitRepoExist(repoName)){
+          let project = await Project.create({...args});
+          project = await project.populate('group');
+          return project;
+        } else {
+          throw new AuthenticationError(`Github repo ${repoName} does not exist`);
+        }
       }
     },
     createGroup: async (parent, args, context) => {
