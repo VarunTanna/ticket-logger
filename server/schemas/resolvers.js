@@ -20,12 +20,18 @@ const resolvers = {
     //   }).populate({ path: ['users', 'projects'] }).populate( { path: 'tickets', populate: 'projects' } ));
     // },
     users_groups: async (parent, args, context) => {
-      console.log(args);
-      console.log(context.user);
-      return (
-      Group.find({
-        users: context.user
-      }).populate('users'));
+      let groups = await Group.find().populate('users');
+      let retGroups = []
+      for(let group of groups){
+        for(let user of group.users){
+          if ((user+'').indexOf(context.user._id)!=-1) {
+            retGroups.push(group);
+            break;
+          }
+        }
+      }
+      console.log("returning",retGroups)
+      return retGroups;
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -36,20 +42,84 @@ const resolvers = {
     group: async (parent, args, context) => {
       return Group.find(args.users);
     },
-    groups: async () => {
-      let groups = Group.find().populate('users');
-      let test = Group.find();
-      console.log(test);
-      return groups;
+    // groups: async () => {
+    //   let groups = Group.find().populate('users');
+    //   let test = Group.find();
+    //   console.log(test);
+    //   return groups;
+    // },
+    groups: async (parent, args, context) => {
+      let groups = await Group.find().populate('users');
+      let retGroups = []
+      for(let group of groups){
+        for(let user of group.users){
+          if ((user+'').indexOf(context.user._id)!=-1) {
+            retGroups.push(group);
+            break;
+          }
+        }
+      }
+      console.log("returning",retGroups)
+      return retGroups;
     },
-    tickets: async () => {
-      return Ticket.find();
+    // tickets: async () => {
+    //   return Ticket.find();
+    // },
+    tickets: async (parent, args, context) => {
+      let groups = await Group.find().populate('users');
+      let groupIds = []
+      for(let group of groups){
+        for(let user of group.users){
+          if ((user+'').indexOf(context.user._id)!=-1) {
+            groupIds.push(group._id+"");
+            break;
+          }
+        }
+      }
+      let projectIds = []
+      let projects = await Project.find().populate('group');
+      for(let project of projects){
+        if(groupIds.indexOf(project.group._id+"")!=-1){
+          projectIds.push(project.group._id+"")
+        }
+      }
+      let tickets = await Ticket.find();
+      console.log("all tickets",tickets)
+      let retTickets = []
+      for(let ticket of tickets){
+        if(projectIds.indexOf(ticket.project+"")!=-1){
+          retTickets.push(ticket);
+        }
+      }
+
+      return retTickets;
     },
     ticket: async (parent, { ticketId }) => {
       return Ticket.findOne({ _id: ticketId });
     },
-    projects: async () => {
-      return Project.find().populate('group');
+    // projects: async () => {
+    //   return Project.find().populate('group');
+    // },
+    projects: async (parent, args, context) => {
+      let groups = await Group.find().populate('users');
+      let groupIds = []
+      for(let group of groups){
+        for(let user of group.users){
+          if ((user+'').indexOf(context.user._id)!=-1) {
+            groupIds.push(group._id+"");
+            break;
+          }
+        }
+      }
+      let projects = await Project.find().populate('group');
+      console.log("all of the projects", projects)
+      let retProjects = []
+      for(let project of projects){
+        if(groupIds.indexOf(project.group._id+"")!=-1){
+          retProjects.push(project)
+        }
+      }
+      return retProjects;
     },
     project: async (parent, { ticketId }) => {
       return Project.findOne({ _id: ticketId });

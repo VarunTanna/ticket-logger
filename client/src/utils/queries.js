@@ -82,7 +82,7 @@ export const QUERY_GROUPS = gql`
       name
       users {
         email
-        github
+
       }
     }
   }

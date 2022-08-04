@@ -38,7 +38,7 @@ function NewProject() {
     const { data } =  await createProject({
       variables: { groupId: projectGroupId, name: projectName, repo: projectRepo }
     });
-    navigate('/project');
+    navigate('/myprojects');
   }
   return (
       <>
