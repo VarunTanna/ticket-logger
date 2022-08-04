@@ -16,7 +16,7 @@ function NewTicket() {
   const projectOptions = [];
 
   for (let i=0; i < projectList.length; i++) {
-    let option = { key: projectList[i]._id, value: String(projectList[i]._id), label: projectList[i].name };
+    let option = { key: projectList[i]._id, value: projectList[i].name, label: projectList[i].name };
     projectOptions.push(option);
   };
 
@@ -24,10 +24,11 @@ function NewTicket() {
     title: '',
     description: '',
     type: '',
-    project: '',
     order: ``,
     duedate: '',
   });
+
+  const [project, setProject] = useState('')
 
   const [createTicket, {error}] = useMutation(CREATE_TICKET);
 
@@ -40,12 +41,18 @@ function NewTicket() {
     }
   };
 
+  const handleChange = (e) => {
+    console.log(e.value);
+    setProject(e.key);    
+  };
+
   const handleSubmit = (e) => {
     console.log(formData)
+    console.log(project);
     e.preventDefault();
       
     const { data } = createTicket({
-      variables: { ...formData }
+      variables: { ...formData, projectId: project }
     });
   }
 
@@ -91,26 +98,19 @@ function NewTicket() {
                   );
                 })}
               </select> */}
-              {/* <Select 
+              <Select 
                 id="project"
-                onChange={selectChange}
-                options={projectOptions} isMulti/> */}
-                <select onChange={inputChange} name="project">
+                name="project"
+                // onChange={selectChange}
+                options={projectOptions} onChange={handleChange}/>
+                {/* <select onChange={inputChange} name="project">
                   {
                     projectOptions.map(p => {
                       return <option value={p.value}>{p.label}</option>
                     })
                   }
-                </select>
+                </select> */}
               <br></br>
-              {/* <input 
-                  value={project}
-                  name="project"
-                  type="text"
-                  placeholder="project name"
-                  onChange={inputChange}
-                  style={style.input}
-              /> */}
               <label>Order:</label>
               <input 
                   value={formData.order}
@@ -125,7 +125,7 @@ function NewTicket() {
                   value={formData.duedate}
                   name="duedate"
                   type="text"
-                  placeholder="ticket due date"
+                  placeholder="MM/DD/YYYY"
                   onChange={inputChange}
                   style={style.input}
               />

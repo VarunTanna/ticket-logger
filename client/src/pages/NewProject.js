@@ -19,7 +19,7 @@ function NewProject() {
   const groupOptions = [];
 
   for (let i=0; i < groupList.length; i++) {
-    let option = { key: groupList[i]._id, value: groupList[i]._id, label: groupList[i].name };
+    let option = { key: groupList[i]._id, value: groupList[i].users, label: groupList[i].name };
     groupOptions.push(option);
   };
 
@@ -41,12 +41,13 @@ function NewProject() {
 
   const handleChange = (e) => {
     console.log(e);
-    setProjectGroupId(e.value);
+    setProjectGroupId(e.key);
   };
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     console.log(projectRepo);
+    console.log(projectGroupId);
     const { data } =  await createProject({
       variables: { groupId: projectGroupId, name: projectName, repo: projectRepo }
     });
@@ -67,11 +68,11 @@ function NewProject() {
                   style={style.input}
               />
               <label>Repository:</label>
-              <textarea 
+              <input 
                   rows={4}
                   value={projectRepo}
                   name="repo"
-                  type="textarea"
+                  type="text"
                   placeholder="enter github repo"
                   onChange={inputChangeB}
                   style={style.input}

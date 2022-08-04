@@ -23,11 +23,11 @@ const ticketSchema = new Schema({
     },
     project: {
         type: Schema.Types.ObjectId,
-        ref: 'project',
+        ref: 'Project',
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
     }
 });
 
