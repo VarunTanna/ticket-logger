@@ -86,12 +86,10 @@ const resolvers = {
       let tickets = await Ticket.find();
       let retTickets = []
       for(let ticket of tickets){
-        console.log(ticket.project+"",projectIds)
         if(projectIds.indexOf(ticket.project+"")!=-1){
           retTickets.push(ticket);
         }
       }
-      console.log("returned tickets",retTickets)
       return retTickets;
     },
     ticket: async (parent, { ticketId }) => {
@@ -112,7 +110,6 @@ const resolvers = {
         }
       }
       let projects = await Project.find().populate('group');
-      console.log("all of the projects", projects)
       let retProjects = []
       for(let project of projects){
         if(groupIds.indexOf(project.group._id+"")!=-1){
