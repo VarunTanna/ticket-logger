@@ -10,10 +10,11 @@ const MyGroups = () => {
   const { loading, data, refetch } = useQuery(QUERY_MY_GROUPS);
   const [deleteGroup, {error}] = useMutation(DELETE_GROUP);
   const navigate = useNavigate();
-  //console.log(data);
-  const groups = data?.groups || [];
+  console.log(data);
+  
 
-  //console.log(groups);
+  const groups = data?.users_groups || [];
+  console.log(groups);
 
   useEffect(function() {
     refetch();
