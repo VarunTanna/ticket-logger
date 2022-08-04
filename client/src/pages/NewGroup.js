@@ -4,10 +4,13 @@ import { CREATE_GROUP } from "../utils/mutations";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_USERS } from "../utils/queries";
 import Select from "react-select";
+import { useNavigate } from 'react-router-dom';
 
 function NewGroup() {
 
+
   const { loading, data } = useQuery(QUERY_ALL_USERS);
+  const navigate = useNavigate();
 
   const userList = data?.users || [];
   console.log(userList);
@@ -40,19 +43,24 @@ function NewGroup() {
     for (let i = 0; i < e.length; i++) {
       let user = e[i].value;
       groupUsers.push(user);
+      console.log(groupUsers)
     };
-
+    //groupUsers = groupUsers => [...new Set(groupUsers)];
   };
 
-  
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formData);
     console.log(groupUsers);
-    const { data } = createGroup({
-      variables: { name: groupName, users: groupUsers }
+    let uniqueUsers = groupUsers.filter(onlyUnique);
+    const { data } = await createGroup({
+      variables: { name: groupName, users: uniqueUsers }
     });
+    navigate('/myGroups');
   };
 
   return (
