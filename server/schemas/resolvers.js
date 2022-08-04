@@ -137,7 +137,7 @@ const resolvers = {
       const group = Group.findByIdAndDelete(groupId);
       return group;
     },
-    deleteProject: async (parent, { projectId }, context) => {
+    deleteProject: async (parent, {projectId}, context) => {
       const project= Project.findByIdAndDelete(projectId);
       return project;
     }

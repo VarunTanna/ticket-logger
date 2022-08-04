@@ -12,7 +12,7 @@ import Home from './pages/Home';
 // import User from './pages/User';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Project from './pages/Project';
+import MyProjects from './pages/MyProjects';
 import NewProject from './pages/NewProject';
 import TicketsList from './pages/Tickets';
 import Header from './components/Header';
@@ -20,6 +20,7 @@ import Footer from './components/Footer';
 import NewTicket from './pages/NewTicket';
 import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
+
 // import Tickets from './pages/Tickets';
 
 const httpLink = createHttpLink({
@@ -97,8 +98,8 @@ function App() {
                 element={<NewProject />} 
               />
                <Route 
-                path="/Project/" 
-                element={<Project />} 
+                path="/MyProjects/" 
+                element={<MyProjects />} 
               />
               {/* <Route 
                 path="/groups/" 

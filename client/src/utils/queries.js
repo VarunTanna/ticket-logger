@@ -122,6 +122,7 @@ export const QUERY_PROJECTS = gql`
 //       name
 //       repo
 //       group{
+//       _id
 //       name
 //       }
 //     }
