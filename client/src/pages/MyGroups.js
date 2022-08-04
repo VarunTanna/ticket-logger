@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
+import { useMutation } from "@apollo/client";
+import { DELETE_GROUP } from "../utils/mutations";
 
 const MyGroups = () => {
   const { loading, data, refetch } = useQuery(QUERY_GROUPS);

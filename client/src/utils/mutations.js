@@ -40,13 +40,13 @@ export const CREATE_PROJECT = gql`
 `;
 
 export const CREATE_TICKET = gql`
-  mutation createTicket($title: String!, $description: String!, $type: String!, $project: String!, $order: Int!, $duedate: String!, ) {
-    createTicket(title: $title, description: $description, type: $type, project: $project, order: $order, duedate: $duedate) {
+  mutation createTicket($title: String!, $description: String!, $type: String!, $projectId: ID!, $order: Int!, $duedate: String!, ) {
+    createTicket(title: $title, description: $description, type: $type, projectId: $projectId, order: $order, duedate: $duedate) {
       title
       description
       type
       project {
-      name
+        name
       }
       order
       duedate
@@ -64,6 +64,7 @@ export const CREATE_GROUP = gql`
     }
   }
 `;
+
 // export const DELETE_PROJECT = gql`
 //   mutation deleteProject($name: String!, $repo: String!, $groupId: ID!) {
 //     deleteProject(name: $name, repo: $repo, groupId: $groupId) {
@@ -76,3 +77,14 @@ export const CREATE_GROUP = gql`
 //     }
 //   }
 // `;
+
+
+export const DELETE_GROUP = gql`
+  mutation deleteGroup($groupId: ID!) {
+    deleteGroup(groupId: $groupId) {
+      _id
+      name
+    }
+  }
+`;
+

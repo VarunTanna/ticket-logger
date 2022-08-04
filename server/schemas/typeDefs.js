@@ -60,9 +60,10 @@ const typeDefs = gql`
     updateUser(email: String!, password: String!, github: String!): Auth
     login(email: String!, password: String!): Auth
 
-    createTicket(title: String!, description: String!, type: String!, project: String!, order: Int!, duedate: String!): Ticket
+    createTicket(title: String!, description: String!, type: String!, projectId: ID!, order: Int!, duedate: String!): Ticket
     createProject(name: String!, repo: String!, groupId: ID!): Project
     createGroup(name: String!, users: [String]!): Group
+    deleteGroup(groupId: ID!): Group
   }
 `;
 
