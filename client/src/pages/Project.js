@@ -20,7 +20,7 @@ if (!projects.length) {
 }
   return (
     <>
-    <Link className="btn btn-sm btn-primary m-2" to="/newProject">
+    <Link className="btn btn-lg btn-primary m-2" to="/newProject">
            Add a Project
            </Link>
           <table>
