@@ -16,7 +16,7 @@ function NewTicket() {
   const projectOptions = [];
 
   for (let i=0; i < projectList.length; i++) {
-    let option = { key: projectList[i]._id, value: projectList[i].email, label: projectList[i].email };
+    let option = { key: projectList[i]._id, value: String(projectList[i]._id), label: projectList[i].name };
     projectOptions.push(option);
   };
 
@@ -33,10 +33,15 @@ function NewTicket() {
 
   const inputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if(name == 'order') {
+      setFormData({ ...formData, [name]: parseInt(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
+    console.log(formData)
     e.preventDefault();
       
     const { data } = createTicket({
@@ -86,7 +91,17 @@ function NewTicket() {
                   );
                 })}
               </select> */}
-              <Select options={projectOptions} isMulti/>
+              {/* <Select 
+                id="project"
+                onChange={selectChange}
+                options={projectOptions} isMulti/> */}
+                <select onChange={inputChange} name="project">
+                  {
+                    projectOptions.map(p => {
+                      return <option value={p.value}>{p.label}</option>
+                    })
+                  }
+                </select>
               <br></br>
               {/* <input 
                   value={project}
@@ -100,7 +115,7 @@ function NewTicket() {
               <input 
                   value={formData.order}
                   name="order"
-                  type="integer"
+                  type="number"
                   placeholder="order number"
                   onChange={inputChange}
                   style={style.input}

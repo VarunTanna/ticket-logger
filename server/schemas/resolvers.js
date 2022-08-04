@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Ticket, Group, Project } = require('../models');
 const { signToken } = require('../utils/auth');
 const api = require('../utils/api');
+const mongoose = require('mongoose');
 
 const resolvers = {
   Query: {
@@ -89,7 +90,15 @@ const resolvers = {
 
     createTicket: async (parent, args, context) => {
       if(context.user) {
-        return Ticket.create({...args, user: context.user});
+        return Ticket.create({
+          title: args.title,
+          description: args.description,
+          type: args.type,
+          order: args.order,
+          duedate: args.duedate,
+          // project: mongoose.Types.ObjectId(args.project),
+          project: args.project,
+           user: context.user});
       }
       throw new AuthenticationError('No ticket created')
     },
