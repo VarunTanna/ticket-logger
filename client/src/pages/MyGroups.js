@@ -4,13 +4,16 @@ import { QUERY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { DELETE_GROUP } from "../utils/mutations";
+import { useNavigate } from 'react-router-dom';
 
 const MyGroups = () => {
   const { loading, data, refetch } = useQuery(QUERY_GROUPS);
-  console.log(data);
+  const [deleteGroup, {error}] = useMutation(DELETE_GROUP);
+  const navigate = useNavigate();
+  //console.log(data);
   const groups = data?.groups || [];
 
-  console.log(groups);
+  //console.log(groups);
 
   useEffect(function() {
     refetch();
@@ -27,6 +30,16 @@ const MyGroups = () => {
     );
   }
 
+  const handleDelete =  async (e) => {
+    e.preventDefault();
+    console.log("handle delete",e, e.key);
+    const { data } =  await deleteGroup({
+      variables: { groupId: e.target.id }
+    });
+    navigate('/mygroups');
+  }
+
+
   return (
     <>
       <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
@@ -40,8 +53,9 @@ const MyGroups = () => {
             <th>Delete Group</th>
           </tr>
         </thead>
+        <tbody>
         {groups && groups.map((group) => (
-          <tbody>
+          
             <tr>
               <td>{group.name}</td>
               <td>
@@ -50,11 +64,12 @@ const MyGroups = () => {
                 }
               </td>
               <td className='text-center'>
-                <a href={'nowhere/' + group._id}><img src='delete.png' alt={'Delete group ' + group.name}></img></a>
+                <img id={group._id} onClick={handleDelete} src='delete.png' alt={'Delete group ' + group.name}></img>
               </td>
             </tr>
-          </tbody>
+          
         ))}
+        </tbody>
       </table>
     </>
   )
