@@ -20,15 +20,22 @@ function NewTicket() {
     projectOptions.push(option);
   };
 
+  const typeOptions = [
+    {value: "bug", label: "bug"},
+    {value: "styling", label: "styling"},
+    {value: "missing", label: "missing"},
+    {value: "collab", label: "collab"},
+  ];
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    type: '',
     order: ``,
     duedate: '',
   });
 
   const [project, setProject] = useState('')
+  const [type, setType] = useState('')
 
   const [createTicket, {error}] = useMutation(CREATE_TICKET);
 
@@ -41,9 +48,14 @@ function NewTicket() {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChangeA = (e) => {
     console.log(e.value);
     setProject(e.key);    
+  };
+
+  const handleChangeB = (e) => {
+    console.log(e.value);
+    setType(e.value);    
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +64,7 @@ function NewTicket() {
     e.preventDefault();
       
     const { data } = createTicket({
-      variables: { ...formData, projectId: project }
+      variables: { ...formData, type: String(type), projectId: project }
     });
 
     
@@ -73,7 +85,7 @@ function NewTicket() {
               />
               <label>Description:</label>
               <textarea 
-                  rows={4}
+                  rows={3}
                   value={formData.description}
                   name="description"
                   type="textarea"
@@ -82,13 +94,19 @@ function NewTicket() {
                   style={style.input}
               />
               <label>Type:</label>
-              <input 
+              {/* <input 
                   value={formData.type}
                   name="type"
                   type="text"
                   placeholder="ticket type"
                   onChange={inputChange}
                   style={style.input}
+              /> */}
+              <Select  
+                id="type"
+                name="type"
+                options={typeOptions}
+                onChange={handleChangeB}
               />
               <label>Project:</label>
               {/* <select name="project" onChange={inputChange}>
@@ -104,7 +122,7 @@ function NewTicket() {
                 id="project"
                 name="project"
                 // onChange={selectChange}
-                options={projectOptions} onChange={handleChange}/>
+                options={projectOptions} onChange={handleChangeA}/>
                 {/* <select onChange={inputChange} name="project">
                   {
                     projectOptions.map(p => {

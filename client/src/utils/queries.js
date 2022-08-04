@@ -25,8 +25,14 @@ export const QUERY_ALL_USERS = gql`
 export const QUERY_TICKETS = gql`
   query tickets {
     tickets {
-      _id
       title
+      type
+      description
+      order
+      duedate
+      project {
+        _id
+      }
     }
   }
 `;
@@ -52,6 +58,8 @@ export const QUERY_MY_GROUPS = gql`
     }
   }
 `;
+
+
 
 // export const QUERY_MY_GROUPS = gql`
 //   query users_groups {

@@ -20,6 +20,10 @@ const MyGroups = () => {
     refetch();
   })
 
+  const click = (e) => {
+    console.log(e);
+  };
+
   if (!groups.length) {
     return (
       <>
@@ -37,7 +41,7 @@ const MyGroups = () => {
     const { data } =  await deleteGroup({
       variables: { groupId: e.target.id }
     });
-    navigate('/mygroups');
+    navigate('/myGroups');
   }
 
 
@@ -57,7 +61,7 @@ const MyGroups = () => {
         <tbody>
         {groups && groups.map((group) => (
           
-            <tr>
+            <tr onClick={click}>
               <td>{group.name}</td>
               <td>
                 {

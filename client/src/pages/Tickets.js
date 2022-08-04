@@ -9,7 +9,10 @@ import { QUERY_TICKETS } from "../utils/queries";
 // import { QUERY_TICKETS } from '../utils/queries';
 
 const TicketsList = () => {
-  const tickets = useQuery(QUERY_TICKETS);
+  const {loading, data} = useQuery(QUERY_TICKETS);
+  const tickets = data?.tickets || [];
+
+  console.log(tickets);
 
   if (!tickets.length) {
     return (
@@ -36,12 +39,12 @@ const TicketsList = () => {
             </tr>
             {tickets && tickets.map((ticket) => (
              <tr>
-               <td>{ticket.title}</td>
-               <td>{ticket.type}</td>
-               <td>{ticket.description}</td>
-               <td>{ticket.project}</td>
-               <td>{ticket.order}</td>
-               <td>{ticket.duedate}</td>
+               <td key="title">{ticket.title}</td>
+               <td key="type">{ticket.type}</td>
+               <td key="description" >{ticket.description}</td>
+               {/* <td>{ticket.project._id}</td> */}
+               <td key="order" >{ticket.order}</td>
+               <td key="dudate">{ticket.duedate}</td>
              </tr> 
             ))}
           </table>
