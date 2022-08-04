@@ -44,6 +44,11 @@ const MyGroups = () => {
     navigate('/myGroups');
   }
 
+  const formatDate = (str) => {
+    var d = new Date.parse(str);
+    return d.format('dd-m-yy');
+  }
+
 
   return (
     <>
