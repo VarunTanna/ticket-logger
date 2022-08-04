@@ -30,7 +30,7 @@ const MyGroups = () => {
       <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
         Create a Group
       </Link>
-      <table>
+      <table className='styled-table'>
         <thead>
           <tr>
             <th>Name</th>
@@ -47,7 +47,7 @@ const MyGroups = () => {
                   group.users.map(user => <span className='btn m-1'>{user.email}</span>)
                 }
               </td>
-              <td>
+              <td className='text-center'>
                 <a href={'nowhere/' + group._id}><img src='delete.png' alt={'Delete group ' + group.name}></img></a>
               </td>
             </tr>
