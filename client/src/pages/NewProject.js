@@ -4,10 +4,13 @@ import { useQuery } from "@apollo/client";
 import { CREATE_PROJECT } from '../utils/mutations'
 import { QUERY_GROUPS} from '../utils/queries'
 import Select from "react-select";
+import { useNavigate } from 'react-router-dom';
 
 function NewProject() {
 
   const { loading, data } = useQuery(QUERY_GROUPS)
+
+  const navigate = useNavigate();
 
   const groupList = data?.groups || [];
 
@@ -41,12 +44,13 @@ function NewProject() {
     setProjectGroupId(e.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  async (e) => {
     e.preventDefault();
     console.log(projectRepo);
-    const { data } = createProject({
+    const { data } =  await createProject({
       variables: { groupId: projectGroupId, name: projectName, repo: projectRepo }
     });
+    navigate('/project');
   }
 
   return (

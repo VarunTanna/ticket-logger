@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
@@ -6,60 +6,55 @@ import { useMutation } from "@apollo/client";
 import { DELETE_GROUP } from "../utils/mutations";
 
 const MyGroups = () => {
-  const {loading, data} = useQuery(QUERY_GROUPS);
+  const { loading, data, refetch } = useQuery(QUERY_GROUPS);
   console.log(data);
   const groups = data?.groups || [];
 
   console.log(groups);
 
-  const [deleteGroup, { error }] = useMutation(DELETE_GROUP);
-
-  const handleDelete = (id) => {
-    let group = deleteGroup({
-      variables: { groupId: id }
-    });
-    return group;
-  };
+  useEffect(function() {
+    refetch();
+  })
 
   if (!groups.length) {
     return (
       <>
         <h3>No Groups Yet</h3>
         <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
-        Create a Group
+          Create a Group
         </Link>
       </>
     );
   }
-  
+
   return (
     <>
-        <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
+      <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
         Create a Group
-        </Link>
-      <table>
-        <tr>
-          <th>ID</th>
-          
-          <th>Name</th>
-          
-          <th>Users</th>
-          
-          <th>Delete</th>
-        </tr>
-      {groups && groups.map((group) => (
+      </Link>
+      <table className='styled-table'>
+        <thead>
           <tr>
-            <td>{group._id}</td>
-            
-            <td>{group.name}</td>
-            
-            {
-              group.users.map(user=><td>{user.email}</td>)
-            }
-            
-            <td><button className="delete" onClick={handleDelete(group._id)}>delete</button></td>
+            <th>Name</th>
+            <th>Users</th>
+            <th>Delete Group</th>
           </tr>
-      ))}
+        </thead>
+        {groups && groups.map((group) => (
+          <tbody>
+            <tr>
+              <td>{group.name}</td>
+              <td>
+                {
+                  group.users.map(user => <span className='btn m-1'>{user.email}</span>)
+                }
+              </td>
+              <td className='text-center'>
+                <a href={'nowhere/' + group._id}><img src='delete.png' alt={'Delete group ' + group.name}></img></a>
+              </td>
+            </tr>
+          </tbody>
+        ))}
       </table>
     </>
   )
