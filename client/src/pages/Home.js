@@ -9,6 +9,11 @@ const Home = () => {
   const { loading, data } = useQuery(QUERY_TICKETS);
   const tickets = data?.tickets || [];
 
+  const formatDate = (str) => {
+    var d = new Date(str-1);
+    return d.toLocaleDateString();
+  }
+
   return (
     <main>
       <div className="flex-row justify-center">
@@ -18,10 +23,34 @@ const Home = () => {
             {loading ? (
               <div>Loading...</div>
             ) : (
-              <TicketList
-                tickets={tickets}
-                title="Here are the current tickets..."
-              />
+              <div className="ticketTable">
+          <table className='styled-table'>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Project</th>
+              <th>Order</th>
+              <th>Due Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {tickets && tickets.map((ticket) => (
+             <tr>
+                {console.log(ticket)}
+               <td key="title"><a href={'/Ticket/'+ticket._id}>{ticket.title}</a></td>
+               <td key="type">{ticket.type}</td>
+               <td key="description" >{ticket.description}</td>
+               <td>{ticket.project._id}</td>
+               <td key="order" >{ticket.order}</td>
+               <td key="duedate">{formatDate(ticket.duedate)}</td>
+             </tr>
+              
+            ))}
+            </tbody>
+          </table>
+        </div>
             )}
             </>
           ) : (
