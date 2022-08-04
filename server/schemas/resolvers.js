@@ -111,13 +111,22 @@ const resolvers = {
       // }
       // throw new AuthenticationError('No ticket created')
     },
-
     createProject: async (parent, {name,repo,groupId}, context) => {
-      // if(context.user) {
-        let project = await Project.create({name,repo,group:groupId});
-        project = await project.populate('group');
-        return project;
-      // }
+      if(context.user) {
+        console.log(args);
+        let repoName = args.repo.trim();
+        if(repoName.toLowerCase().startsWith('https://github.com/')){
+          repoName = repoName.substring(19);
+          args.repo = repoName;
+        }
+        if(await api.doesGitRepoExist(repoName)){
+          let project = await Project.create({name,repo,group:groupId});
+          project = await project.populate('group');
+          return project;
+        } else {
+          throw new AuthenticationError(`Github repo ${repoName} does not exist`);
+        }
+      }
     },
     createGroup: async (parent, args, context) => {
       let group = await Group.create({...args});

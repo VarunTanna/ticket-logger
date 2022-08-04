@@ -5,45 +5,32 @@ import { CREATE_PROJECT } from '../utils/mutations'
 import { QUERY_GROUPS} from '../utils/queries'
 import Select from "react-select";
 import { useNavigate } from 'react-router-dom';
-
 function NewProject() {
-
   const { loading, data } = useQuery(QUERY_GROUPS)
-
   const navigate = useNavigate();
-
   const groupList = data?.groups || [];
-
   console.log(groupList);
-
   const groupOptions = [];
-
   for (let i=0; i < groupList.length; i++) {
     let option = { key: groupList[i]._id, value: groupList[i].users, label: groupList[i].name };
     groupOptions.push(option);
   };
-
   const [projectName, setProjectName] = useState('');
   const [projectRepo, setProjectRepo] = useState('');
   const [projectGroupId, setProjectGroupId] = useState();
-
   const [createProject, {error}] = useMutation(CREATE_PROJECT);
-
   const inputChangeA = (e) => {
     const { name, value } = e.target;
     setProjectName(value);
   };
-
   const inputChangeB = (e) => {
     const { name, value } = e.target;
     setProjectRepo(value);
   };
-
   const handleChange = (e) => {
     console.log(e);
     setProjectGroupId(e.key);
   };
-
   const handleSubmit =  async (e) => {
     e.preventDefault();
     console.log(projectRepo);
@@ -53,13 +40,12 @@ function NewProject() {
     });
     navigate('/project');
   }
-
   return (
       <>
           <h1>Create a Project</h1>
           <form className="form" style={style.form}>
               <label>Name:</label>
-              <input 
+              <input
                   value={projectName}
                   name="name"
                   type="text"
@@ -93,6 +79,7 @@ function NewProject() {
                   Submit
               </button>
           </form>
+
           {error && (
               <div>
                   <p className="error-text">{error}</p>
@@ -101,7 +88,6 @@ function NewProject() {
       </>
   )
 }
-
 const style = {
   form: {
       margin: '18px',
@@ -112,5 +98,4 @@ const style = {
       width: '100%',
   },
 }
-
 export default NewProject;
