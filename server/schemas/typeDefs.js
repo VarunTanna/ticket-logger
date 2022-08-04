@@ -56,6 +56,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(email: String!, password: String!, github: String!): Auth
     #deleteUser(email: String!, password: String!, github: String!): Auth
+    
     deleteUser(email: String!, password: String!, github: String!): User
     updateUser(email: String!, password: String!, github: String!): Auth
     login(email: String!, password: String!): Auth
@@ -64,6 +65,7 @@ const typeDefs = gql`
     createProject(name: String!, repo: String!, groupId: ID!): Project
     createGroup(name: String!, users: [String]!): Group
     deleteGroup(groupId: ID!): Group
+    deleteProject(projectId: ID!): Project
   }
 `;
 
