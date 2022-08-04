@@ -81,8 +81,8 @@ function NewProject() {
           </form>
 
           {error && (
-              <div>
-                  <p className="error-text">{error}</p>
+              <div className="my-3 p-3 bg-danger text-white">
+                  <p className="error-text">{error.message}</p>
               </div>
           )}
       </>

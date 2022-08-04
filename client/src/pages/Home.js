@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-
+import Auth from "../utils/auth";
 import TicketList from '../components/TicketList';
 
 import { QUERY_TICKETS } from '../utils/queries';
@@ -13,14 +13,22 @@ const Home = () => {
     <main>
       <div className="flex-row justify-center">
         <div className="col-12 col-md-10 my-3">
-          {loading ? (
-            <div>Loading...</div>
+        {Auth.loggedIn() ? (
+            <>
+            {loading ? (
+              <div>Loading...</div>
+            ) : (
+              <TicketList
+                tickets={tickets}
+                title="Here are the current tickets..."
+              />
+            )}
+            </>
           ) : (
-            <TicketList
-              tickets={tickets}
-              title="Here are the current tickets..."
-            />
+            <img src='largelogo.png'/>
           )}
+          
+
         </div>
       </div>
     </main>
