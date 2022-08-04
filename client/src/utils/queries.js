@@ -110,6 +110,20 @@ export const QUERY_PROJECTS = gql`
       _id
       name
       repo
+      
     }
   }
 `;
+
+// export const QUERY_PROJECTS = gql`
+//   query projects {
+//     projects {
+//       _id
+//       name
+//       repo
+//       group{
+//       name
+//       }
+//     }
+//   }
+// `;

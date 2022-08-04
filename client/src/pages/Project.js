@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+// import { useMutation } from "@apollo/client";
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { QUERY_PROJECTS } from '../utils/queries';
+// import { DELETE_PROJECT } from "../utils/mutations";
 
 const Project = () => {
   const { loading, data, refetch } = useQuery(QUERY_PROJECTS);
@@ -22,6 +24,7 @@ const Project = () => {
       </>
     );
   }
+
   return (
     <>
       <Link className="btn btn-sm btn-primary m-2" to="/newProject">

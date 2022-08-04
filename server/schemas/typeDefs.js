@@ -62,7 +62,6 @@ const typeDefs = gql`
 
     createTicket(title: String!, description: String!, type: String!, project: String!, order: Int!, duedate: String!): Ticket
     createProject(name: String!, repo: String!, groupId: ID!): Project
-   
     createGroup(name: String!, users: [String]!): Group
   }
 `;
