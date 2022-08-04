@@ -66,14 +66,13 @@ export const CREATE_GROUP = gql`
 `;
 
 export const DELETE_PROJECT = gql`
-  mutation deleteProject(projectId: ID!) {
-    deleteProject(projectId: ID!) {
+  mutation deleteProject($projectId: ID!) {
+    deleteProject(projectId: $projectId) {
      _id
       name
     }
   }
 `;
-
 
 export const DELETE_GROUP = gql`
   mutation deleteGroup($groupId: ID!) {
