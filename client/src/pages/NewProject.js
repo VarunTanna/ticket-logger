@@ -54,7 +54,7 @@ function NewProject() {
                   style={style.input}
               />
               <label>Repository:</label>
-              <input
+              <input 
                   rows={4}
                   value={projectRepo}
                   name="repo"

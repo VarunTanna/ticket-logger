@@ -88,21 +88,30 @@ const resolvers = {
       return { token, user };
     },
 
-    createTicket: async (parent, args, context) => {
-      if(context.user) {
-        return Ticket.create({
-          title: args.title,
-          description: args.description,
-          type: args.type,
-          order: args.order,
-          duedate: args.duedate,
-          // project: mongoose.Types.ObjectId(args.project),
-          project: args.project,
-           user: context.user});
-      }
-      throw new AuthenticationError('No ticket created')
+    // createTicket: async (parent, args, context) => {
+    //   if(context.user) {
+    //     return Ticket.create({
+    //       title: args.title,
+    //       description: args.description,
+    //       type: args.type,
+    //       order: args.order,
+    //       duedate: args.duedate,
+    //       // project: mongoose.Types.ObjectId(args.project),
+    //       project: args.project,
+    //        user: context.user});
+    //   }
+    //   throw new AuthenticationError('No ticket created')
+    // },
+
+    createTicket: async (parent, {title,description,order,type,duedate,projectId}, context) => {
+      // if(context.user) {
+        let ticket = await Ticket.create({title,description,order,type,duedate,project:projectId});
+        ticket = await ticket.populate('project');
+        return ticket;
+      // }
+      // throw new AuthenticationError('No ticket created')
     },
-    createProject: async (parent, args, context) => {
+    createProject: async (parent, {name,repo,groupId}, context) => {
       if(context.user) {
         console.log(args);
         let repoName = args.repo.trim();
@@ -111,7 +120,7 @@ const resolvers = {
           args.repo = repoName;
         }
         if(await api.doesGitRepoExist(repoName)){
-          let project = await Project.create({...args});
+          let project = await Project.create({name,repo,group:groupId});
           project = await project.populate('group');
           return project;
         } else {
@@ -124,6 +133,10 @@ const resolvers = {
       group = await group.populate('users');
       return group;
     },
+    deleteGroup: async (parent, { groupId }, context) => {
+      const group = Group.findByIdAndDelete(groupId);
+      return group;
+    }
   }
 };
 

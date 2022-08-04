@@ -74,6 +74,7 @@ function App() {
               <Route
                 path="/myGroups"
                 element={<MyGroups />}
+                refresh='true'
               />
               <Route
                 path="/newGroup"

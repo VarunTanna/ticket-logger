@@ -11,7 +11,7 @@ const projectSchema = new Schema({
     },
     group: {
         type: Schema.Types.ObjectId,
-        ref: 'group',
+        ref: 'Group',
     }
 });
 
