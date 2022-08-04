@@ -14,9 +14,13 @@ const userSchema = new Schema({
       minlength: 5,
     },
     github: {
-        type: String,
-        required: true,
-      }
+      type: String,
+      required: true,
+    },
+    groups: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Group',
+    }]
   });
   
   // set up pre-save middleware to create password

@@ -13,6 +13,19 @@ const resolvers = {
       console.log(args);
       return User.findById(args.userId);
     },
+    // users_groups: async (parent, args, context) => {
+    //   return (
+    //   Group.find({
+    //     users: args.userId
+    //   }).populate({ path: ['users', 'projects'] }).populate( { path: 'tickets', populate: 'projects' } ));
+    // },
+    users_groups: async (parent, args, context) => {
+      console.log(context.user._id);
+      return (
+      Group.find({
+        users: context.user
+      }).populate('users'));
+    },
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
@@ -23,7 +36,10 @@ const resolvers = {
       return Group.find(args.users);
     },
     groups: async () => {
-      return Group.find().populate('users');
+      let groups = Group.find().populate('users');
+      let test = Group.find();
+      console.log(test);
+      return groups;
     },
     tickets: async () => {
       return Ticket.find();
@@ -130,6 +146,8 @@ const resolvers = {
     createGroup: async (parent, args, context) => {
       let group = await Group.create({...args});
       group = await group.populate('users');
+      let me = await User.findOne({ _id: context.user._id });
+      me = await me.populate('groups');
       return group;
     },
     deleteGroup: async (parent, { groupId }, context) => {

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useQuery } from '@apollo/client';
-import { QUERY_GROUPS } from "../utils/queries";
+import { QUERY_MY_GROUPS } from "../utils/queries";
 import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { DELETE_GROUP } from "../utils/mutations";
 import { useNavigate } from 'react-router-dom';
 
 const MyGroups = () => {
-  const { loading, data, refetch } = useQuery(QUERY_GROUPS);
+  const { loading, data, refetch } = useQuery(QUERY_MY_GROUPS);
   const [deleteGroup, {error}] = useMutation(DELETE_GROUP);
   const navigate = useNavigate();
   //console.log(data);

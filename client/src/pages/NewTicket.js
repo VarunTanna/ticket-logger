@@ -54,6 +54,8 @@ function NewTicket() {
     const { data } = createTicket({
       variables: { ...formData, projectId: project }
     });
+
+    
   }
 
   return (

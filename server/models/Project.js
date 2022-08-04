@@ -12,7 +12,11 @@ const projectSchema = new Schema({
     group: {
         type: Schema.Types.ObjectId,
         ref: 'Group',
-    }
+    },
+    tickets: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Ticket'
+    }]
 });
 
 const Project = model('Project', projectSchema);

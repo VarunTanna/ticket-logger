@@ -31,7 +31,7 @@ const typeDefs = gql`
     email: String
     password: String
     github: String
-    #groups: [Group]
+    groups: [Group]
   }
 
   type Auth {
@@ -42,6 +42,7 @@ const typeDefs = gql`
   type Query {
     users: [User]!
     user(userId: ID!): User
+    users_groups: [Group]    
     me: User
     group: Group
     groups: [Group]
