@@ -190,9 +190,9 @@ const resolvers = {
     //   throw new AuthenticationError('No ticket created')
     // },
 
-    createTicket: async (parent, {title,description,order,type,duedate,projectId}, context) => {
+    createTicket: async (parent, { title , description ,order , type , duedate , projectId }, context) => {
       // if(context.user) {
-        let ticket = await Ticket.create({title,description,order,type,duedate,project:projectId});
+        let ticket = await Ticket.create( {title, description , order , type , duedate , project: projectId });
         ticket = await ticket.populate('project');
         return ticket;
       // }
@@ -217,8 +217,6 @@ const resolvers = {
     createGroup: async (parent, args, context) => {
       let group = await Group.create({...args});
       group = await group.populate('users');
-      let me = await User.findOne({ _id: context.user._id });
-      me = await me.populate('groups');
       return group;
     },
     deleteGroup: async (parent, { groupId }, context) => {
