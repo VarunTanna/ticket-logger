@@ -1,13 +1,13 @@
 import React,  { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import TicketList from "../pages/Tickets";
 import { Navigate } from 'react-router-dom';
 import { QUERY_SINGLE_TICKET } from '../utils/queries';
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 
-const SingleTicket = () => {
+const Ticket = () => {
   const {loading, data, refetch} = useQuery(QUERY_SINGLE_TICKET);
   const ticket = data?.ticket || [];
   const navigate = useNavigate();
@@ -82,4 +82,4 @@ const SingleTicket = () => {
 }
 
 
-export default SingleTicket;
+export default Ticket;

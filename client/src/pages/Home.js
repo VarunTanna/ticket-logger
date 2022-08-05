@@ -71,7 +71,7 @@ const Home = () => {
             )}
             </>
           ) : (
-            <img src='largelogo.png'/>
+            <img src='largelogo.png' width='350px'/>
           )}
           
 
