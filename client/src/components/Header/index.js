@@ -23,6 +23,9 @@ const Header = () => {
         <div>
           {Auth.loggedIn() ? (
             <>
+               <Link className="btn btn-lg btn-primary m-2" to="/home">
+                Home
+              </Link>
               <Link className="btn btn-lg btn-primary m-2" to="/AllTickets">
                 View All Tickets
               </Link>

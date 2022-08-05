@@ -1,52 +1,80 @@
-import React from "react";
+import React,  { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-
 import TicketList from "../pages/Tickets";
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { QUERY_SINGLE_TICKET } from '../utils/queries';
+import { Link } from "react-router-dom";
 
 
 
 const SingleTicket = () => {
-  const { ticketId } = useParams();
+  const {loading, data, refetch} = useQuery(QUERY_SINGLE_TICKET);
+  const ticket = data?.ticket || [];
+  const navigate = useNavigate();
+  
+  useEffect(function() {
+    refetch();
+  })
 
-  const { loading, data } = useQuery(QUERY_SINGLE_TICKET, {
-    // pass URL parameter
-    variables: { ticketId: ticketId },
-  });
+  const click = (e) => {
+    console.log(e);
+  };
 
-  const ticket = data?.ticket || {};
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (!ticket.length) {
+    return (
+      <>
+        <h3>No Tickets Yet</h3>
+        <Link className="btn btn-lg btn-primary m-2" to="/newTicket">
+        Create a Ticket
+        </Link>
+      </>
+    );
   }
+
+  const formatDate = (str) => {
+    var d = new Date(str-1);
+    return d.toLocaleDateString();
+  }
+
+  const handleDrill =  async (e) => {
+    e.preventDefault();
+    //console.log("handle drill",e, e.key);
+    navigate('/AllTickets');
+    // navigate('/Ticket/{e.key}');
+  }
+
   return (
-    <div className="my-3">
-      <h3 className="card-header bg-dark text-light p-2 m-0">
-        {ticket.ticketUser} <br />
-        <span style={{ fontSize: '1rem' }}>
-          opened this ticket {ticket.order}
-        </span>
-      </h3>
-      <div className="bg-light py-4">
-        <blockquote
-          className="p-4"
-          style={{
-            fontSize: '1.5rem',
-            fontStyle: 'italic',
-            border: '2px dotted #1a1a1a',
-            lineHeight: '1.5',
-          }}
-        >
-          {ticket.ticketTitle}
-        </blockquote>
-      </div>
-      <div className="my-5">
-        <TicketList tickets={ticket.list} />
-      </div>
-    
+    <div>
+      <div className="ticketTable">
+          <table className='styled-table'>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Project</th>
+              <th>Order</th>
+              <th>Due Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {ticket && ticket.map((ticket) => (
+             <tr>
+                {console.log(ticket)}
+               <td key="title"><a href={'/Ticket/'+ticket._id}>{ticket.title}</a></td>
+               <td key="type">{ticket.type}</td>
+               <td key="description" >{ticket.description}</td>
+               <td>{ticket.project._id}</td>
+               <td key="order" >{ticket.order}</td>
+               <td key="duedate">{formatDate(ticket.duedate)}</td>
+             </tr>
+              
+            ))}
+            </tbody>
+          </table>
+        </div>
     </div>
-  );
-};
+  )
+}
 
 export default SingleTicket;

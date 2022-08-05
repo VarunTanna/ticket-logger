@@ -424,12 +424,12 @@ button {
 }
 
 a {
-  color: #41172b;
+  color: #f9067c;
   text-decoration: none;
 }
 
 a:hover {
-  color: #db2882;
+  color: #370b21;
   text-decoration: underline;
 }
 
@@ -921,7 +921,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #d068b8 !important;
+  background-color: #dd6dc3 !important;
 }
 
 .bg-info {
@@ -929,7 +929,7 @@ a:hover {
 }
 
 .bg-danger {
-  background-color: #e64c66 !important;
+  background-color: #dd3086 !important;
 }
 
 .bg-light {
@@ -1050,7 +1050,7 @@ a:hover {
 
 .btn.btn-dark {
   background-color: #000000;
-  color: #f0249e;
+  color: #d20982;
 }
 
 .btn.btn-dark:hover {
@@ -1714,7 +1714,9 @@ label form [type='radio'] {
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 400px;
-  box-shadow: 0 0 20px rgba(50, 49, 49, 0);
+  background-color: #d449a1;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(10, 10, 10, 0);
 }
 .styled-table thead tr {
   background-color: #d449a1;
@@ -1736,5 +1738,5 @@ label form [type='radio'] {
 }
 
 .styled-table tbody tr:last-of-type {
-  border: 2px solid #c72993;
+  border-bottom: 2px solid #c72993;
 }
