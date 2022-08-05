@@ -16,9 +16,6 @@ const SingleTicket = () => {
     refetch();
   })
 
-  const click = (e) => {
-    console.log(e);
-  };
 
   if (!ticket.length) {
     return (
@@ -32,6 +29,7 @@ const SingleTicket = () => {
   }
 
   const formatDate = (str) => {
+    if(str==315550800000){return ''}
     var d = new Date(str-1);
     return d.toLocaleDateString();
   }
@@ -39,34 +37,40 @@ const SingleTicket = () => {
   const handleDrill =  async (e) => {
     e.preventDefault();
     //console.log("handle drill",e, e.key);
-    navigate('/AllTickets');
-    // navigate('/Ticket/{e.key}');
+    navigate('/Ticket/{e.key}');
   }
 
+  const retNiceValue = (valIn) => {
+    if(valIn){return valIn};
+    return '';
+  }
   return (
     <div>
       <div className="ticketTable">
+        <h1>All Tickets</h1>
           <table className='styled-table'>
             <thead>
             <tr>
               <th>Title</th>
               <th>Type</th>
+              <th>User</th>
               <th>Description</th>
               <th>Project</th>
-              <th>Order</th>
+              <th>Sprint #</th>
               <th>Due Date</th>
             </tr>
             </thead>
             <tbody>
             {ticket && ticket.map((ticket) => (
-             <tr>
-                {console.log(ticket)}
-               <td key="title"><a href={'/Ticket/'+ticket._id}>{ticket.title}</a></td>
-               <td key="type">{ticket.type}</td>
-               <td key="description" >{ticket.description}</td>
-               <td>{ticket.project._id}</td>
-               <td key="order" >{ticket.order}</td>
-               <td key="duedate">{formatDate(ticket.duedate)}</td>
+             <tr id={ticket._id}>
+                {/* {console.log(ticket)} */}
+               <td><a href={'/Ticket/'+ticket._id}>{ticket.title}</a></td>
+               <td>{ticket.type}</td>
+               <td></td>
+               <td>{ticket.description}</td>
+               <td>{ticket.project.name}</td>
+               <td>{ticket.order}</td>
+               <td>{formatDate(ticket.duedate)}</td>
              </tr>
               
             ))}
@@ -76,5 +80,6 @@ const SingleTicket = () => {
     </div>
   )
 }
+
 
 export default SingleTicket;
