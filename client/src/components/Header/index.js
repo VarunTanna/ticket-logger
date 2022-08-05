@@ -23,9 +23,13 @@ const Header = () => {
         <div>
           {Auth.loggedIn() ? (
             <>
-              <Link className="btn btn-lg btn-primary m-2" to="/myTickets">
-                View My Tickets
+              <Link className="btn btn-lg btn-primary m-2" to="/AllTickets">
+                View All Tickets
               </Link>
+              <Link className="btn btn-lg btn-primary m-2" to="/NewTicket">
+               Create new Ticket
+              </Link>
+              
               <Link className="btn btn-lg btn-primary m-2" to="/myGroups">
                 My Groups
               </Link>

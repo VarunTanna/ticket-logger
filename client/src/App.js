@@ -14,14 +14,13 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import MyProjects from './pages/MyProjects';
 import NewProject from './pages/NewProject';
-import TicketsList from './pages/Tickets';
+import TicketsList from './pages/AllTickets';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import NewTicket from './pages/NewTicket';
 import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
-
-// import Tickets from './pages/Tickets';
+// import AllTickets from './pages/AllTickets';
 
 const httpLink = createHttpLink({
   uri: '/graphql',

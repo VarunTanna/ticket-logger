@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { Link } from "react-router-dom";
 import { QUERY_TICKETS } from "../utils/queries";
-import moment from 'moment';
+// import moment from 'moment';
 
 
 // import { useQuery } from "@apollo/client";
