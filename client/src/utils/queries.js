@@ -71,7 +71,13 @@ export const QUERY_SINGLE_TICKET = gql`
     ticket(ticketId: $ticketId) {
       _id
       title
-      ticket
+      description
+      order
+      type
+      duedate
+      project {
+        name
+      }
     }
   }
 `;

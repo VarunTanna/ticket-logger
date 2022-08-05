@@ -86,6 +86,7 @@ const resolvers = {
       let tickets = await Ticket.find().populate('user').populate('project');
       let retTickets = []
       for(let ticket of tickets){
+        console.log(ticket);
         const project = ticket.project;
         //console.log(project)
         if(projectIds.indexOf(project._id+"")!=-1){
@@ -101,7 +102,7 @@ const resolvers = {
       return tickets;
     },
     ticket: async (parent, { ticketId }) => {
-      return Ticket.findOne({ _id: ticketId });
+      return Ticket.findOne({ _id: ticketId }).populate('project');
     },
     // projects: async () => {
     //   return Project.find().populate('group');
@@ -178,6 +179,11 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+
+    updateTicket: async (parent, args, context) => {
+      const ticket = Ticket.findOneAndUpdate({ _id: args.ticketId }, { ...args }, { new: true })
+      return ticket;
     },
 
     // createTicket: async (parent, args, context) => {
