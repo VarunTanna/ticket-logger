@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { CREATE_TICKET } from '../utils/mutations'
 import { QUERY_PROJECTS } from '../utils/queries'
 import Select from "react-select";
+import { useNavigate } from 'react-router-dom';
 
 function NewTicket() {
 
@@ -11,7 +12,7 @@ function NewTicket() {
 
   const projectList = data?.projects || [];
 
-  console.log(projectList);
+  const navigate = useNavigate();
 
   const projectOptions = [];
 
@@ -66,7 +67,7 @@ function NewTicket() {
     const { data } = createTicket({
       variables: { ...formData, type: String(type), projectId: project }
     });
-
+    navigate('/home');
     
   }
 
@@ -144,7 +145,7 @@ function NewTicket() {
               <input 
                   value={formData.duedate}
                   name="duedate"
-                  type="text"
+                  type="date"
                   placeholder="MM/DD/YYYY"
                   onChange={inputChange}
                   style={style.input}
