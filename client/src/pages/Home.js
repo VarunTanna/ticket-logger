@@ -15,6 +15,7 @@ const Home = () => {
   const formatDate = (str) => {
     if(str==315550800000){return ''}
     var d = new Date(str-1);
+    if(d.toLocaleDateString()=='12/31/1979'){return ''}
     return d.toLocaleDateString();
   }
 
