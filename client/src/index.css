@@ -1040,12 +1040,12 @@ a:hover {
 }
 
 .btn.btn-light {
-  background-color: #000000;
+  background-color: #ff0396;
   color: #ffffff;
 }
 
 .btn.btn-light:hover {
-  background-color: #c64e94;
+  background-color: #000000;
 }
 
 .btn.btn-dark {

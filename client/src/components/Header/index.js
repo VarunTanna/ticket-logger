@@ -23,7 +23,7 @@ const Header = () => {
         <div>
           {Auth.loggedIn() ? (
             <>
-               <Link className="btn btn-lg btn-primary m-2" to="/home">
+               <Link className="btn btn-lg btn-light m-2" to="/home">
                 Home
               </Link>
               <Link className="btn btn-lg btn-primary m-2" to="/AllTickets">
