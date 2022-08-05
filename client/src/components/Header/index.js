@@ -32,7 +32,6 @@ const Header = () => {
               <Link className="btn btn-lg btn-primary m-2" to="/NewTicket">
                Create new Ticket
               </Link>
-              
               <Link className="btn btn-lg btn-primary m-2" to="/myGroups">
                 My Groups
               </Link>

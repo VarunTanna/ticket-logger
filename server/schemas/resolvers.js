@@ -96,9 +96,7 @@ const resolvers = {
       return retTickets;
     },
     my_tickets: async (parent, args, context) => {
-      let tickets = await Ticket.find({user: context.user._id}).populate('user').populate('project');
-
-      return tickets;
+      let tickets = await Ticket.find({user: context.user._id}).populate('user').populate('project');      return tickets;
     },
     ticket: async (parent, { ticketId }) => {
       return Ticket.findOne({ _id: ticketId });
