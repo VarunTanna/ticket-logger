@@ -15,6 +15,8 @@ function NewTicket() {
   const navigate = useNavigate();
 
   const projectOptions = [];
+  const userOptions = [];
+
 
   for (let i=0; i < projectList.length; i++) {
     let option = { key: projectList[i]._id, value: projectList[i].name, label: projectList[i].name };
@@ -22,10 +24,10 @@ function NewTicket() {
   };
 
   const typeOptions = [
-    {value: "bug", label: "bug"},
-    {value: "styling", label: "styling"},
-    {value: "missing", label: "missing"},
-    {value: "collab", label: "collab"},
+    {value: "Bug", label: "Bug"},
+    {value: "Feature", label: "Feature"},
+    {value: "Styling", label: "Styling"},
+    {value: "Other", label: "Other"},
   ];
 
   const [formData, setFormData] = useState({
@@ -50,14 +52,15 @@ function NewTicket() {
   };
 
   const handleChangeA = (e) => {
-    console.log(e.value);
+    //console.log(e.value);
     setProject(e.key);    
   };
 
   const handleChangeB = (e) => {
-    console.log(e.value);
+    //console.log(e.value);
     setType(e.value);    
   };
+
 
   const handleSubmit = (e) => {
     console.log(formData)
@@ -65,7 +68,7 @@ function NewTicket() {
     e.preventDefault();
       
     const { data } = createTicket({
-      variables: { ...formData, type: String(type), projectId: project }
+      variables: { ...formData, type: String(type), projectId: project, userID: null }
     });
     navigate('/home');
     
@@ -110,34 +113,20 @@ function NewTicket() {
                 onChange={handleChangeB}
               />
               <label>Project:</label>
-              {/* <select name="project" onChange={inputChange}>
-                {projectList.map((project) => {
-                  return (
-                    <option key={project._id} value={project.name}>
-                      {project.name}
-                    </option>
-                  );
-                })}
-              </select> */}
               <Select 
                 id="project"
                 name="project"
                 // onChange={selectChange}
                 options={projectOptions} onChange={handleChangeA}/>
-                {/* <select onChange={inputChange} name="project">
-                  {
-                    projectOptions.map(p => {
-                      return <option value={p.value}>{p.label}</option>
-                    })
-                  }
-                </select> */}
+              <label>User Assignment:</label>
+              
               <br></br>
-              <label>Order:</label>
+              <label>Sprint #:</label>
               <input 
                   value={formData.order}
                   name="order"
                   type="number"
-                  placeholder="order number"
+                  placeholder="target sprint number"
                   onChange={inputChange}
                   style={style.input}
               />

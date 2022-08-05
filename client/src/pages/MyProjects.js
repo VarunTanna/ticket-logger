@@ -52,11 +52,13 @@ const MyProjects = () => {
           </tr>
         </thead>
         <tbody>
+        
           {projects && projects.map((project) => (
+            
             <tr>
               <td className='btn m-1'>{project.name}</td>
               <td><a href={'https://github.com/' + project.repo} target='_blank'>{project.repo}</a></td>
-              <td>{project.group}</td>
+              <td>{project.group.name}</td>
               <td className='text-center'>
                 <img id={project._id} onClick={handleDelete} src='delete.png' alt={'Delete project ' + project.name}></img>
               </td>            
