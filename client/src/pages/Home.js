@@ -3,16 +3,17 @@ import { useQuery } from '@apollo/client';
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
 import { DELETE_TICKET } from "../utils/mutations";
-import { QUERY_TICKETS } from '../utils/queries';
+import { QUERY_MY_TICKETS } from '../utils/queries';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
-  const { loading, data } = useQuery(QUERY_TICKETS);
+  const { loading, data } = useQuery(QUERY_MY_TICKETS);
   const [deleteTicket, {error}] = useMutation(DELETE_TICKET);
   const tickets = data?.tickets || [];
 
   const formatDate = (str) => {
+    if(str==315550800000){return ''}
     var d = new Date(str-1);
     return d.toLocaleDateString();
   }

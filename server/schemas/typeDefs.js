@@ -47,6 +47,7 @@ const typeDefs = gql`
     group: Group
     groups: [Group]
     tickets: [Ticket]!
+    my_tickets: [Ticket]!
     ticket(ticketId: ID!): Ticket
     project(projectId: ID!): Project
     projects: [Project]

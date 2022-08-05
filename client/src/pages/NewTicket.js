@@ -24,17 +24,17 @@ function NewTicket() {
   };
 
   const typeOptions = [
-    {value: "Bug", label: "Bug"},
-    {value: "Feature", label: "Feature"},
-    {value: "Styling", label: "Styling"},
+    {value: "Bug 🦟", label: "Bug 🦟"},
+    {value: "Feature ✨", label: "Feature ✨"},
+    {value: "Styling ✨", label: "Styling ✨"},
     {value: "Other", label: "Other"},
   ];
 
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    order: ``,
-    duedate: '',
+    order: 0,
+    duedate: '1/1/1980',
   });
 
   const [project, setProject] = useState('')
@@ -70,7 +70,7 @@ function NewTicket() {
     const { data } = createTicket({
       variables: { ...formData, type: String(type), projectId: project, userID: null }
     });
-    navigate('/home');
+    navigate('/');
     
   }
 
