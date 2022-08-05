@@ -34,8 +34,9 @@ function NewTicket() {
     title: '',
     description: '',
     order: 0,
-    duedate: '1/1/1980',
+    duedate: '1980-01-01',
   });
+//duedate: '1980-01-01'
 
   const [project, setProject] = useState('')
   const [type, setType] = useState('')
@@ -118,7 +119,6 @@ function NewTicket() {
                 name="project"
                 // onChange={selectChange}
                 options={projectOptions} onChange={handleChangeA}/>
-              <label>User Assignment:</label>
               
               <br></br>
               <label>Sprint #:</label>

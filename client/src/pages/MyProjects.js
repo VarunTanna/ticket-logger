@@ -39,7 +39,7 @@ const MyProjects = () => {
 
   return (
     <>
-      <Link className="btn btn-sm btn-primary m-2" to="/newProject">
+      <Link className="btn btn-med btn-primary m-2" to="/newProject">
         Add a Project
       </Link>
       <table className='styled-table'>
