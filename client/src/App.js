@@ -20,7 +20,7 @@ import Footer from './components/Footer';
 import NewTicket from './pages/NewTicket';
 import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
-//import Ticket from './pages/Ticket';
+import Ticket from './pages/Ticket';
 
 import AllTickets from './pages/AllTickets';
 
@@ -66,10 +66,10 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              <Route
+              {/* <Route
                 path="/myTickets"
                 element={<TicketsList />}
-              />
+              /> */}
               <Route
                 path="/newTicket"
                 element={<NewTicket />}
@@ -86,11 +86,11 @@ function App() {
               {/* { <Route 
                 path="/me" 
                 element={<User />} 
-              /> } 
-               { <Route 
-                path="/profiles/:profileId" 
-                element={<Profile />} 
               /> }  */}
+               { <Route 
+                path="/ticket/:ticketId" 
+                element={<Ticket />} 
+              /> }  
                { <Route 
                 path="/AllTickets" 
                 element={<AllTickets />} 
