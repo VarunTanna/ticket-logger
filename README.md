@@ -21,9 +21,6 @@ The ticket logger site allow users to sign-up or login. Once a user has logged i
 ## Visuals 
 -[Live Heroku Site](https://damp-sands-27282.herokuapp.com/)
 -[Github Repo](https://github.com/VarunTanna/ticket-logger)
--[Groups](./mygroups.png)
--[Projects](./myprojects.png)
--[Tickets](./ticketqueue.png)
 
 ## Technologies
   - Node.Js
