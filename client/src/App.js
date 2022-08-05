@@ -24,6 +24,7 @@ import NewGroup from './pages/NewGroup';
 
 // import Tickets from './pages/Tickets';
 
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
