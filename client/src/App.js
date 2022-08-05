@@ -22,7 +22,7 @@ import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
 //import Ticket from './pages/Ticket';
 
-// import Tickets from './pages/Tickets';
+import AllTickets from './pages/AllTickets';
 
 
 const httpLink = createHttpLink({
@@ -91,10 +91,10 @@ function App() {
                 path="/profiles/:profileId" 
                 element={<Profile />} 
               /> }  */}
-               {/* { <Route 
-                path="/tickets" 
-                element={<Tickets />} 
-              />}  */}
+               { <Route 
+                path="/AllTickets" 
+                element={<AllTickets />} 
+              />} 
               <Route 
                 path="/newProject/" 
                 element={<NewProject />} 
