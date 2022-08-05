@@ -20,7 +20,10 @@ import Footer from './components/Footer';
 import NewTicket from './pages/NewTicket';
 import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
-// import AllTickets from './pages/AllTickets';
+//import Ticket from './pages/Ticket';
+
+// import Tickets from './pages/Tickets';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',

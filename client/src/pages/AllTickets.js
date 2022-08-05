@@ -2,8 +2,7 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { Link } from "react-router-dom";
 import { QUERY_TICKETS } from "../utils/queries";
-// import moment from 'moment';
-
+import { useNavigate } from 'react-router-dom';
 
 // import { useQuery } from "@apollo/client";
 
@@ -15,7 +14,7 @@ const TicketsList = () => {
   const {loading, data} = useQuery(QUERY_TICKETS);
   const tickets = data?.tickets || [];
 
-  console.log(tickets);
+  const navigate = useNavigate();
 
   if (!tickets.length) {
     return (
@@ -30,8 +29,13 @@ const TicketsList = () => {
 
   const formatDate = (str) => {
     var d = new Date(str-1);
-    console.log (str,d)
     return d.toLocaleDateString();
+  }
+
+  const handleDrill =  async (e) => {
+    e.preventDefault();
+    //console.log("handle drill",e, e.key);
+    navigate('/Ticket/{e.key}');
   }
 
   return (
@@ -51,7 +55,8 @@ const TicketsList = () => {
             <tbody>
             {tickets && tickets.map((ticket) => (
              <tr>
-               <td key="title">{ticket.title}</td>
+                {console.log(ticket)}
+               <td key="title"><a href={'/Ticket/'+ticket._id}>{ticket.title}</a></td>
                <td key="type">{ticket.type}</td>
                <td key="description" >{ticket.description}</td>
                <td>{ticket.project._id}</td>
