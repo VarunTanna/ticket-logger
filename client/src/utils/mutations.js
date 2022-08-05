@@ -40,7 +40,7 @@ export const CREATE_PROJECT = gql`
 `;
 
 export const CREATE_TICKET = gql`
-  mutation createTicket($title: String!, $description: String!, $type: String!, $projectId: ID!, $order: String!, $duedate: String!, ) {
+  mutation createTicket($title: String!, $description: String!, $type: String!, $projectId: ID!, $order: Int!, $duedate: String!, ) {
     createTicket(title: $title, description: $description, type: $type, projectId: $projectId, order: $order, duedate: $duedate) {
       title
       description

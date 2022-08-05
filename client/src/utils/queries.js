@@ -44,6 +44,28 @@ export const QUERY_TICKETS = gql`
   }
 `;
 
+export const QUERY_MY_TICKETS = gql`
+  query my_tickets {
+    tickets {
+      _id
+      title
+      type
+      description
+      order
+      duedate
+      user {
+        _id
+        email
+        github
+      }
+      project {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 export const QUERY_SINGLE_TICKET = gql`
   query ticket($ticketId: ID!) {
     ticket(ticketId: $ticketId) {

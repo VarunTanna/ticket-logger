@@ -28,6 +28,7 @@ const TicketsList = () => {
   }
 
   const formatDate = (str) => {
+    if(str==315550800000){return ''}
     var d = new Date(str-1);
     return d.toLocaleDateString();
   }
