@@ -91,3 +91,14 @@ export const DELETE_TICKET = gql`
   }
 `;
 
+export const UPDATE_TICKET = gql`
+  mutation updateTicket($ticketId: ID!, $title: String, $description: String, $type: String, $projectId: ID, $order: Int, $duedate: String) {
+    updateTicket(ticketId: $ticketId, title: $title, description: $description, type: $type, projectId: $projectId, order: $order, duedate: $duedate) {
+      title
+      description
+      type
+      order
+      duedate
+    }
+  }
+`;

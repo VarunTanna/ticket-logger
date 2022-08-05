@@ -21,6 +21,7 @@ import NewTicket from './pages/NewTicket';
 import MyGroups from './pages/MyGroups';
 import NewGroup from './pages/NewGroup';
 import Ticket from './pages/Ticket';
+import UpdateTicket from './pages/UpdateTicket';
 
 import AllTickets from './pages/AllTickets';
 
@@ -89,7 +90,7 @@ function App() {
               /> }  */}
                { <Route 
                 path="/ticket/:ticketId" 
-                element={<Ticket />} 
+                element={<UpdateTicket />} 
               /> }  
                { <Route 
                 path="/AllTickets" 
