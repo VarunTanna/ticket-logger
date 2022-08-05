@@ -48,7 +48,7 @@ const MyGroups = () => {
 
   return (
     <>
-      <Link className="btn btn-lg btn-primary m-2" to="/newGroup">
+      <Link className="btn btn-med btn-primary m-2" to="/newGroup">
         Create a Group
       </Link>
       <table className='styled-table'>
