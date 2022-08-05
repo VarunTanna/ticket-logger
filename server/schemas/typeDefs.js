@@ -67,6 +67,7 @@ const typeDefs = gql`
     createGroup(name: String!, users: [String]!): Group
     deleteGroup(groupId: ID!): Group
     deleteProject(projectId: ID!): Project
+    deleteTicket(ticketId: ID!): Ticket
   }
 `;
 

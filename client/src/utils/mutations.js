@@ -40,7 +40,7 @@ export const CREATE_PROJECT = gql`
 `;
 
 export const CREATE_TICKET = gql`
-  mutation createTicket($title: String!, $description: String!, $type: String!, $projectId: ID!, $order: Int!, $duedate: String!, ) {
+  mutation createTicket($title: String!, $description: String!, $type: String!, $projectId: ID!, $order: String!, $duedate: String!, ) {
     createTicket(title: $title, description: $description, type: $type, projectId: $projectId, order: $order, duedate: $duedate) {
       title
       description
@@ -79,6 +79,14 @@ export const DELETE_GROUP = gql`
     deleteGroup(groupId: $groupId) {
       _id
       name
+    }
+  }
+`;
+
+export const DELETE_TICKET = gql`
+  mutation deleteTicket($ticketId: ID!) {
+    deleteTicket(ticketId: $ticketId) {
+      _id
     }
   }
 `;

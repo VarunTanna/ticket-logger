@@ -83,13 +83,16 @@ const resolvers = {
           projectIds.push(project._id+"")
         }
       }
-      let tickets = await Ticket.find();
+      let tickets = await Ticket.find().populate('user').populate('project');
       let retTickets = []
       for(let ticket of tickets){
-        if(projectIds.indexOf(ticket.project+"")!=-1){
+        const project = ticket.project;
+        //console.log(project)
+        if(projectIds.indexOf(project._id+"")!=-1){
           retTickets.push(ticket);
         }
       }
+      console.log(retTickets)
       return retTickets;
     },
     ticket: async (parent, { ticketId }) => {
@@ -189,6 +192,11 @@ const resolvers = {
 
     createTicket: async (parent, { title , description ,order , type , duedate , projectId }, context) => {
       // if(context.user) {
+        if(!order){order = 0}
+        if(!duedate){duedate = new Date('1/1/1980')}
+        console.log("order",order,"due date",duedate)
+        
+        console.log("due date",duedate)
         let ticket = await Ticket.create( {title, description , order , type , duedate , project: projectId });
         ticket = await ticket.populate('project');
         return ticket;
@@ -223,6 +231,10 @@ const resolvers = {
     deleteProject: async (parent, { projectId }, context) => {
       const project= Project.findByIdAndDelete(projectId);
       return project;
+    },
+    deleteTicket: async (parent, { ticketId }, context) => {
+      const ticket= Ticket.findByIdAndDelete(ticketId);
+      return ticket;
     }
   }
 };

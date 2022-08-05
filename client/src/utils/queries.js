@@ -31,8 +31,14 @@ export const QUERY_TICKETS = gql`
       description
       order
       duedate
+      user {
+        _id
+        email
+        github
+      }
       project {
         _id
+        name
       }
     }
   }
@@ -142,7 +148,7 @@ export const QUERY_PROJECTS = gql`
       _id
       name
       repo
-      
+      group{name} 
     }
   }
 `;
