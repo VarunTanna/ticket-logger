@@ -37,7 +37,7 @@ const Ticket = () => {
   const handleDrill =  async (e) => {
     e.preventDefault();
     //console.log("handle drill",e, e.key);
-    navigate('/Ticket/{e.key}');
+    navigate('/AllTickets/{e.key}');
   }
 
   const retNiceValue = (valIn) => {
@@ -80,6 +80,7 @@ const Ticket = () => {
     </div>
   )
 }
+
 
 
 export default Ticket;
